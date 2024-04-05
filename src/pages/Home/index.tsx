@@ -5,7 +5,7 @@ import Restaurants from "../../components/Cards"
 const Home = () => (
     <>
         <Header />
-        <Restaurants tipo="restaurantes" to="/saibaMais" titleButton="Saiba mais" />
+        <Restaurants tipo="restaurantes" to="/saibaMais/1" titleButton="Saiba mais" />
         <Footer />
     </>
 )

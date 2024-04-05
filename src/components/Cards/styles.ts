@@ -44,21 +44,3 @@ export const Text = styled.p`
     width: 100%;
     margin: 16px 0;
 `
-
-export const Button = styled.button <Omit<Props, 'titleButton' | 'to'>>`
-    width: ${(props) => props.tipo === 'comidas' && '100%'};
-    background-color: ${(props) => props.tipo === 'comidas' ? `${Cores.branco}` : `${Cores.laranja}`};
-    padding: 4px 6px;
-    font-size: 14px;
-    border: none;
-    cursor: pointer;
-    transition: ease 0.1s;
-
-    a {
-        color: ${(props) => props.tipo === 'comidas' ? `${Cores.laranja}` : `${Cores.branco}`};
-    }
-
-    &:hover {
-        scale: 1.05;
-    }
-`

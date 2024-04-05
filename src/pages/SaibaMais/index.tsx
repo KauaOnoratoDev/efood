@@ -7,7 +7,7 @@ const SaibaMais = () => (
     <>
         <HeaderSaibaMais />
         <Banner />
-        <Card tipo="comidas" to="" titleButton="Adicionar ao carrinho" />
+        <Card tipo="comidas" to="" titleButton="Adicionar ao carrinho" />  
         <Footer />
     </>
 )

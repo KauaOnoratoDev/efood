@@ -5,7 +5,7 @@ import SaibaMais from './pages/SaibaMais'
 const Rotas = () => (
   <Routes>
     <Route path="/" element={<Home />} />
-    <Route path='/saibaMais' element={<SaibaMais />} />
+    <Route path='/saibaMais/:id' element={<SaibaMais />} />
   </Routes>
 )
 

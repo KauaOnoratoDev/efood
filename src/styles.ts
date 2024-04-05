@@ -1,4 +1,5 @@
-import { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
+import { Props } from './components/Cards'
 
 export const GlobalStyle = createGlobalStyle`
     * {
@@ -22,3 +23,23 @@ export const Cores = {
     laranja: '#E66767',
     branco: '#fff'
 }
+
+export const Button = styled.button <Omit<Props, 'titleButton' | 'to'>>`
+    width: ${(props) => props.tipo === 'comidas' && '100%'};
+    background-color: ${(props) => props.tipo === 'comidas' ? `${Cores.branco}` : `${Cores.laranja}`};
+    color: ${(props) => props.tipo === 'comidas' ? `${Cores.laranja}` : `${Cores.branco}`};
+    padding: 4px 6px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: ease 0.1s;
+
+    a {
+        color: ${(props) => props.tipo === 'comidas' ? `${Cores.laranja}` : `${Cores.branco}`};
+    }
+
+    &:hover {
+        scale: 1.05;
+    }
+`
