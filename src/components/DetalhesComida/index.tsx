@@ -3,7 +3,8 @@ import { Container, Title, Text, Conteudo } from "./styles"
 import food1 from '../../assets/images/food1.png'
 
 const DetalhesComida = () => (
-    <Container>
+    <>
+        <Container>
             <img src={food1} alt="" />
             <Conteudo>
                 <Title>Pizza Marguerita</Title>
@@ -12,7 +13,8 @@ const DetalhesComida = () => (
                 </Text>
                 <Button tipo="comidas" type="submit">Adicionar ao carrinho - R$ 60,90</Button>
             </Conteudo>
-    </Container>
+        </Container>
+    </>
 )
 
 export default DetalhesComida

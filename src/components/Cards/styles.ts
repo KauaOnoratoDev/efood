@@ -44,3 +44,15 @@ export const Text = styled.p`
     width: 100%;
     margin: 16px 0;
 `
+
+export const Fundo = styled.div`
+    &::after {
+        content: ''; 
+        width: 1000vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.8);
+        position: fixed;
+        top: 0;
+        left: 0; 
+    }
+`
