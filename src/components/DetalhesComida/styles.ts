@@ -17,9 +17,8 @@ export const Container = styled.div`
         width: 280px;
         height: 280px;
     }
-
     `
-    
+
 export const Conteudo = styled.div`
     margin-left: 24px;
     
