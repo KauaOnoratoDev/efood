@@ -1,53 +1,48 @@
 import { Link } from 'react-router-dom'
-import { Cards, Container, Conteudo, Fundo, List, Text } from './styles'
+import { Cards, Container, Conteudo, List, Tags, Text } from './styles'
 import { Button } from '../../styles'
-import { restaurantes } from '../../models/restaurantes'
-import { comidas } from '../../models/comidas'
-import { useState } from 'react'
-import DetalhesComida from '../DetalhesComida'
+import estrela from '../../assets/images/estrela.png'
+import { Restaurantes } from '../../pages/Home'
 
 export type Props = {
-    tipo: 'comidas' | 'restaurantes'
-    to: string
-    titleButton: string
+  titleButton: string
+  restaurantes?: Restaurantes[]
 }
 
-const Card = ({ tipo, to, titleButton }: Props) => {
-    const item = () => {
-        if (tipo === 'comidas') {
-            return comidas
-        }
-
-        return restaurantes
-    }
-
-    const [botao, setBotao] = useState(false)
-    return (
-        <>
-            <Container>
-                <div>
-                    <List tipo={tipo}>
-                        {item().map((i) => (
-                            <Cards tipo={tipo} key={i.id}>
-                                <img src={i.img} alt="" />
-                                <Conteudo>
-                                    <h2>{i.h2}</h2>
-                                    <Text>{i.p}</Text>
-                                    <Button onClick={() => setBotao(true)} tipo={tipo} type="button"><Link to={to}>{titleButton}</Link></Button>
-                                </Conteudo>
-                            </Cards>
-                        ))}
-                    </List>
-                </div>
-            </Container>
-            {botao && (
-                <>
-                    <Fundo onClick={() => botao && setBotao(false)} />
-                    <DetalhesComida />
-                </>
-            )}
-        </>
-    )
+const Card = ({ titleButton, restaurantes }: Props) => {
+  return (
+    <>
+      <Container>
+        <div className="container">
+          <List>
+            {restaurantes &&
+              restaurantes.map((i) => (
+                <Cards key={i.id}>
+                  <img src={i.capa} alt="" />
+                  <Tags>
+                    {i.destacado && <span>Destaque da semana</span>}
+                    <span>{i.tipo}</span>
+                  </Tags>
+                  <Conteudo>
+                    <div>
+                      <h2>{i.titulo}</h2>
+                      <div>
+                        <span>{i.avaliacao}</span>
+                        <img src={estrela} alt="" />
+                      </div>
+                    </div>
+                    <Text>{i.descricao}</Text>
+                    <Button type="button">
+                      <Link to={`restaurantes/${i.id}`}>{titleButton}</Link>
+                    </Button>
+                  </Conteudo>
+                </Cards>
+              ))}
+          </List>
+        </div>
+      </Container>
+    </>
+  )
 }
 
 export default Card
