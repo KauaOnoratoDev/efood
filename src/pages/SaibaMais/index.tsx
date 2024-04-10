@@ -1,15 +1,17 @@
-import Banner from "../../components/Banner"
-import Card from "../../components/Cards"
-import Footer from "../../components/Footer"
-import HeaderSaibaMais from "../../components/HeaderSaibaMais"
+import Banner from '../../components/Banner'
+import Footer from '../../components/Footer'
+import HeaderSaibaMais from '../../components/HeaderSaibaMais'
+import Cardapio from '../../components/Cardapio'
 
-const SaibaMais = () => (
+const SaibaMais = () => {
+  return (
     <>
-        <HeaderSaibaMais />
-        <Banner />
-        <Card tipo="comidas" to="" titleButton="Adicionar ao carrinho" />  
-        <Footer />
+      <HeaderSaibaMais />
+      <Banner />
+      <Cardapio titleButton="Adicionar ao carrinho" />
+      <Footer />
     </>
-)
+  )
+}
 
 export default SaibaMais

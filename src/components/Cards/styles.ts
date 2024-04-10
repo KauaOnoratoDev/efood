@@ -1,58 +1,81 @@
-import styled from "styled-components"
-import { Cores } from "../../styles"
-import { Props } from '.'
+import styled from 'styled-components'
+import { Button, Cores } from '../../styles'
 
 export const Container = styled.div`
-    padding: 80px 170px 120px;
+  padding: 80px 0 120px;
 `
-    
-export const List = styled.ul <Omit<Props, 'titleButton' | 'to'>>`
-    grid-template-columns: ${(props) => props.tipo === 'restaurantes' ? '1fr 1fr' : '1fr 1fr 1fr'};
-    color: ${(props) => props.tipo === 'comidas' ? `${Cores.branco}` : `${Cores.laranja}`};   
-    column-gap: ${(props) => props.tipo === 'restaurantes' ? '80px' : '32px'};
-    display: grid;
-    row-gap: 32px;
-    `
-    
-export const Cards = styled.li <Omit<Props, 'titleButton' | 'to'>>`
-    background-color: ${(props) => props.tipo === 'comidas' && `${Cores.laranja}`};
-    padding: 8px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
 
-    img {
-        width: 100%;
-    }
+export const List = styled.ul`
+  grid-template-columns: 1fr 1fr;
+  color: ${Cores.laranja};
+  column-gap: 80px;
+  display: grid;
+  row-gap: 32px;
+`
 
-    h2 {
-        font-size: 18px;
-    }
+export const Cards = styled.li`
+  background-color: ${Cores.branco};
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  img {
+    max-height: 216px;
+    height: 100%;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+`
+
+export const Tags = styled.div`
+  position: absolute;
+  top: 16px;
+  right: 16px;
+
+  span {
+    background-color: ${Cores.laranja};
+    color: ${Cores.branco};
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 8px;
+  }
 `
 
 export const Conteudo = styled.div`
-    border: 1px solid ${Cores.laranja};
-    border-top: none;
-    padding: 8px;
-    overflow-wrap: anywhere;
+  border: 1px solid ${Cores.laranja};
+  border-top: none;
+  padding: 8px;
+  max-height: 180px;
+  height: 100%;
+
+  ${Button} {
+    background-color: ${Cores.laranja};
+
+    a {
+      color: ${Cores.branco};
+    }
+  }
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 18px;
+
+    img {
+      width: 21px;
+      height: 21px;
+      margin-left: 8px;
+    }
+  }
 `
 
 export const Text = styled.p`
-    font-size: 14px;
-    width: 100%;
-    margin: 16px 0;
-`
-
-export const Fundo = styled.div`
-    &::after {
-        content: ''; 
-        width: 1000vw;
-        height: 100vh;
-        background-color: rgba(0, 0, 0, 0.8);
-        position: fixed;
-        top: 0;
-        left: 0; 
-    }
+  font-size: 14px;
+  width: 100%;
+  margin: 16px 0;
 `
