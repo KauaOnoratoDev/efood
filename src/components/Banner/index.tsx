@@ -2,19 +2,16 @@ import { useEffect, useState } from 'react'
 import { Restaurantes } from '../../pages/Home'
 import { Container, Title, Text } from './styles'
 import { useParams } from 'react-router-dom'
+import { useGetCardapioQuery } from '../../services/api'
 
 export type Props = {
   banner: string
 }
 
 const Banner = () => {
-  const [restaurantes, setRestaurantes] = useState<Restaurantes>()
   const { id } = useParams()
-  useEffect(() => {
-    fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
-      .then((res) => res.json())
-      .then((res) => setRestaurantes(res))
-  }, [id])
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const { data: restaurantes } = useGetCardapioQuery(id!)
 
   if (!restaurantes) {
     return <>Carregando...</>

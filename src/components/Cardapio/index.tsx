@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Button } from '../../styles'
 import { Props } from '../Cards'
 import {
@@ -12,8 +12,8 @@ import {
   Text
 } from './styles'
 import { useParams } from 'react-router-dom'
-import { Restaurantes } from '../../pages/Home'
 import DetalhesComida from '../DetalhesComida'
+import { useGetCardapioQuery } from '../../services/api'
 
 export const formataPreco = (preco: number) => {
   return new Intl.NumberFormat('pt-BR', {
@@ -23,7 +23,6 @@ export const formataPreco = (preco: number) => {
 }
 
 const Cardapio = ({ titleButton }: Props) => {
-  const [restaurantes, setRestaurantes] = useState<Restaurantes>()
   const [detalhes, setDetalhes] = useState(false)
   const [nome, setNome] = useState('')
   const [foto, setFoto] = useState('')
@@ -32,11 +31,8 @@ const Cardapio = ({ titleButton }: Props) => {
   const [preco, setPreco] = useState('')
 
   const { id } = useParams()
-  useEffect(() => {
-    fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
-      .then((res) => res.json())
-      .then((res) => setRestaurantes(res))
-  }, [id])
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const { data: restaurantes } = useGetCardapioQuery(id!)
 
   if (!restaurantes) {
     return <>Carregando...</>
