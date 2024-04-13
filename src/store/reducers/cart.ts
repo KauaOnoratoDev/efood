@@ -2,11 +2,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Cardapio } from '../../pages/Home'
 
 type CartState = {
-  items: Cardapio[]
+  itemsCarrinho: Cardapio[]
+  carrinhoEstado: boolean
 }
 
 const initialState: CartState = {
-  items: []
+  itemsCarrinho: [],
+  carrinhoEstado: false
 }
 
 const cartSlice = createSlice({
@@ -14,10 +16,18 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     add: (state, action: PayloadAction<Cardapio>) => {
-      state.items.push(action.payload)
+      state.itemsCarrinho.push(action.payload)
+    },
+    alteraEstadoCarrinho: (state, action: PayloadAction<boolean>) => {
+      state.carrinhoEstado = action.payload
+    },
+    remove: (state, action: PayloadAction<number>) => {
+      state.itemsCarrinho = state.itemsCarrinho.filter(
+        (i) => i.id != action.payload
+      )
     }
   }
 })
 
-export const { add } = cartSlice.actions
+export const { add, alteraEstadoCarrinho, remove } = cartSlice.actions
 export default cartSlice.reducer

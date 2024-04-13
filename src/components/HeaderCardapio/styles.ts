@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Cores } from '../../styles'
+import { Button, Cores } from '../../styles'
 
 export const Container = styled.div`
   background-color: ${Cores.areia};
@@ -15,10 +15,31 @@ export const Container = styled.div`
       scale: 1.05;
 
       &::before {
-        content: '< ';
+        content: '<';
         position: absolute;
-        top: 20px;
-        left: 50px;
+        top: 100%;
+        left: 50%;
+      }
+    }
+
+    ${Button} {
+      background-color: transparent;
+      border: none;
+      color: ${Cores.laranja};
+      font-size: 18px;
+      line-height: 21px;
+      font-weight: bold;
+      padding: 0;
+
+      &:hover {
+        scale: 1.05;
+
+        &::before {
+          content: '>';
+          position: absolute;
+          top: 100%;
+          left: 50%;
+        }
       }
     }
   }

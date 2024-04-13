@@ -32,6 +32,18 @@ export const Button = styled.button`
   transition: ease 0.1s;
 
   &:hover {
-    scale: 1.05;
+    scale: 1.02;
+  }
+`
+
+export const Fundo = styled.div`
+  &::after {
+    content: '';
+    width: 1000vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    top: 0;
+    left: 0;
   }
 `

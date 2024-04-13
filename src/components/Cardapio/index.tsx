@@ -1,5 +1,8 @@
 import { useState } from 'react'
-import { Button } from '../../styles'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
+
+import { Button, Fundo } from '../../styles'
 import { Props } from '../Cards'
 import {
   Botao,
@@ -7,13 +10,14 @@ import {
   Container,
   Conteudo,
   Detalhes,
-  Fundo,
   List,
   Text
 } from './styles'
-import { useParams } from 'react-router-dom'
 import DetalhesComida from '../DetalhesComida'
 import { useGetCardapioQuery } from '../../services/api'
+import Carrinho from '../Carrinho'
+import { RootReducer } from '../../store'
+import { alteraEstadoCarrinho } from '../../store/reducers/cart'
 
 export const formataPreco = (preco: number) => {
   return new Intl.NumberFormat('pt-BR', {
@@ -23,12 +27,17 @@ export const formataPreco = (preco: number) => {
 }
 
 const Cardapio = ({ titleButton }: Props) => {
+  const { carrinhoEstado, itemsCarrinho } = useSelector(
+    (state: RootReducer) => state.cart
+  )
+  const dispatch = useDispatch()
+
   const [detalhes, setDetalhes] = useState(false)
   const [nome, setNome] = useState('')
   const [foto, setFoto] = useState('')
   const [descricao, setDescricao] = useState('')
   const [porcao, setPorcao] = useState('')
-  const [preco, setPreco] = useState('')
+  const [preco, setPreco] = useState(0)
 
   const { id } = useParams()
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -58,7 +67,7 @@ const Cardapio = ({ titleButton }: Props) => {
                       setDescricao(x.descricao)
                       setFoto(x.foto)
                       setPorcao(x.porcao)
-                      setPreco(formataPreco(x.preco))
+                      setPreco(x.preco)
                     }}
                   >
                     {titleButton}
@@ -82,6 +91,12 @@ const Cardapio = ({ titleButton }: Props) => {
             />
             <Botao onClick={() => setDetalhes(false)}>X</Botao>
           </Detalhes>
+        </>
+      )}
+      {itemsCarrinho.length > 0 && carrinhoEstado && (
+        <>
+          <Fundo onClick={() => dispatch(alteraEstadoCarrinho(false))} />
+          <Carrinho />
         </>
       )}
     </>
