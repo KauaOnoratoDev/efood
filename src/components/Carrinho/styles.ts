@@ -1,27 +1,11 @@
 import styled from 'styled-components'
 import { Button, Cores } from '../../styles'
 
-export const BarraLateral = styled.aside`
-  display: flex;
-  flex-direction: column;
-  align-items: end;
-  background-color: ${Cores.laranja};
-  padding: 32px 8px;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  right: 0;
-  color: ${Cores.laranja};
-
-  ul {
-    overflow-y: auto;
-  }
-`
-
 export const ListLink = styled.li`
   background-color: ${Cores.areia};
   margin-bottom: 16px;
   width: 344px;
+  color: ${Cores.laranja};
 
   > div {
     display: flex;

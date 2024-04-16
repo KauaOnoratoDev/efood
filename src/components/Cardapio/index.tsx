@@ -15,9 +15,9 @@ import {
 } from './styles'
 import DetalhesComida from '../DetalhesComida'
 import { useGetCardapioQuery } from '../../services/api'
-import Carrinho from '../Carrinho'
 import { RootReducer } from '../../store'
 import { alteraEstadoCarrinho } from '../../store/reducers/cart'
+import BarraLateral from '../BarraLateral'
 
 export const formataPreco = (preco: number) => {
   return new Intl.NumberFormat('pt-BR', {
@@ -27,7 +27,7 @@ export const formataPreco = (preco: number) => {
 }
 
 const Cardapio = ({ titleButton }: Props) => {
-  const { carrinhoEstado, itemsCarrinho } = useSelector(
+  const { estado, itemsCarrinho } = useSelector(
     (state: RootReducer) => state.cart
   )
   const dispatch = useDispatch()
@@ -93,10 +93,10 @@ const Cardapio = ({ titleButton }: Props) => {
           </Detalhes>
         </>
       )}
-      {itemsCarrinho.length > 0 && carrinhoEstado && (
+      {itemsCarrinho.length > 0 && estado !== '' && (
         <>
-          <Fundo onClick={() => dispatch(alteraEstadoCarrinho(false))} />
-          <Carrinho />
+          <Fundo onClick={() => dispatch(alteraEstadoCarrinho(''))} />
+          <BarraLateral />
         </>
       )}
     </>

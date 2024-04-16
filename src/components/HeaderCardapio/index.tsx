@@ -22,7 +22,7 @@ const HeaderCardapio = () => {
             type="button"
             onClick={() =>
               itemsCarrinho.length > 0
-                ? dispatch(alteraEstadoCarrinho(true))
+                ? dispatch(alteraEstadoCarrinho('carrinho'))
                 : alert('Adicione pelo menos um item no carrinho')
             }
           >

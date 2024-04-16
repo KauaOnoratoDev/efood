@@ -1,5 +1,10 @@
 import styled, { createGlobalStyle } from 'styled-components'
 
+export const breakpoints = {
+  tablet: '768px',
+  desktop: '1024px'
+}
+
 export const GlobalStyle = createGlobalStyle`
     * {
         margin: 0;
@@ -14,6 +19,10 @@ export const GlobalStyle = createGlobalStyle`
         max-width: 1024px;
         width: 100%;
         margin: 0 auto;
+
+        @media (max-width: ${breakpoints.tablet}) {
+          max-width: 80%;
+        }
     }
 `
 
