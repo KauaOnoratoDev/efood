@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Button, Cores } from '../../styles'
+import { Button, Cores, breakpoints } from '../../styles'
 
 export const Container = styled.div`
   padding: 80px 0 120px;
@@ -10,6 +10,10 @@ export const List = styled.ul`
   grid-template-columns: 320px 320px 320px;
   color: ${Cores.branco};
   gap: 32px;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    display: block;
+  }
 `
 
 export const Cards = styled.li`
@@ -17,6 +21,10 @@ export const Cards = styled.li`
   position: relative;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    margin-bottom: 24px;
+  }
 
   img {
     max-height: 216px;
@@ -73,4 +81,9 @@ export const Detalhes = styled.div`
   position: fixed;
   top: 25vh;
   left: calc((100vw - 960px) / 2);
+
+  @media (max-width: ${breakpoints.tablet}) {
+    top: 0;
+    left: 0;
+  }
 `

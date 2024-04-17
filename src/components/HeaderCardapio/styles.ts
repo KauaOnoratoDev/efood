@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Button, Cores } from '../../styles'
+import { Button, Cores, breakpoints } from '../../styles'
 
 export const Container = styled.div`
   background-color: ${Cores.areia};
@@ -19,6 +19,19 @@ export const Container = styled.div`
         position: absolute;
         top: 100%;
         left: 50%;
+      }
+    }
+
+    @media (max-width: ${breakpoints.tablet}) {
+      flex-direction: column;
+
+      .restaurantes:before {
+        content: '<';
+        margin-right: 8px;
+      }
+
+      img {
+        margin: 16px 0;
       }
     }
 

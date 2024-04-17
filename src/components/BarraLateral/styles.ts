@@ -1,5 +1,5 @@
 import { styled } from 'styled-components'
-import { Cores } from '../../styles'
+import { Cores, breakpoints } from '../../styles'
 
 export const BarraLateral = styled.aside`
   display: flex;
@@ -13,6 +13,11 @@ export const BarraLateral = styled.aside`
   right: 0;
   max-width: 360px;
   width: 100%;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    max-width: none;
+    align-items: center;
+  }
 
   ul {
     overflow-y: auto;
