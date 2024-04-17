@@ -5,6 +5,7 @@ type CartState = {
   itemsCarrinho: Cardapio[]
   carrinhoEstado: boolean
   estado: 'carrinho' | 'endereco' | 'pagamento' | 'finalizado' | ''
+  api: object
 }
 
 const initialState: CartState = {
@@ -19,7 +20,8 @@ const initialState: CartState = {
     }
   ],
   carrinhoEstado: false,
-  estado: ''
+  estado: '',
+  api: {}
 }
 
 const cartSlice = createSlice({
@@ -44,10 +46,18 @@ const cartSlice = createSlice({
     },
     zerarCarrinho: (state, action: PayloadAction) => {
       state.itemsCarrinho = []
+    },
+    adicionarApi: (state, action: PayloadAction<object>) => {
+      state.api = action.payload
     }
   }
 })
 
-export const { add, alteraEstadoCarrinho, remove, zerarCarrinho } =
-  cartSlice.actions
+export const {
+  add,
+  alteraEstadoCarrinho,
+  remove,
+  zerarCarrinho,
+  adicionarApi
+} = cartSlice.actions
 export default cartSlice.reducer

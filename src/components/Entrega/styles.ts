@@ -9,16 +9,26 @@ export const Form = styled.form`
   font-weight: bold;
   width: 100%;
 
+  > div {
+    margin-bottom: 16px;
+
+    small {
+      color: red;
+    }
+  }
+
   h3 {
     margin-bottom: 16px;
     font-size: 16px;
   }
 
-  > div {
+  .cepNum {
     display: flex;
     gap: 32px;
-  }
 
+    div {
+      width: 100%;
+    }
   }
 `
 

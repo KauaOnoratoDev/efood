@@ -14,14 +14,20 @@ export const Form = styled.form`
     font-size: 16px;
   }
 
-  div {
-    &:nth-child(4n) {
+  > div {
+    margin-bottom: 16px;
+
+    small {
+      color: red;
+    }
+
+    &:nth-child(3n) {
       display: grid;
       grid-template-columns: 3fr 1fr;
       gap: 30px;
     }
 
-    &:nth-child(5n) {
+    &:nth-child(4n) {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 30px;
