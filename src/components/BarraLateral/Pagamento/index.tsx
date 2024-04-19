@@ -1,14 +1,19 @@
 import { useDispatch, useSelector } from 'react-redux'
 import * as Yup from 'yup'
-import { Button } from '../../styles'
+import { Button } from '../../../styles'
 import { Botoes, Form, Input } from './styles'
-import { alteraEstadoCarrinho } from '../../store/reducers/cart'
+import {
+  adicionarApi,
+  alteraEstadoCarrinho
+} from '../../../store/reducers/cart'
 import { useFormik } from 'formik'
-import { RootReducer } from '../../store'
+import { RootReducer } from '../../../store'
+import { usePurchaseMutation } from '../../../services/api'
 
 const Pagamento = () => {
   const dispatch = useDispatch()
   const { api } = useSelector((state: RootReducer) => state.cart)
+  const [purchase, { isSuccess, isError, data }] = usePurchaseMutation()
 
   const formPagamento = useFormik({
     initialValues: {
@@ -40,7 +45,37 @@ const Pagamento = () => {
         .required('O campo é obrigatório')
     }),
     onSubmit: (values) => {
-      console.log(values)
+      dispatch(adicionarApi(values))
+      purchase({
+        delivery: {
+          receiver: api.nome,
+          address: {
+            description: api.endereco,
+            city: api.cidade,
+            zipCode: String(api.cep),
+            number: api.num,
+            complement: api.complemento
+          }
+        },
+        payment: {
+          card: {
+            name: api.nomeCartao,
+            number: String(api.numCartao),
+            code: api.codigoCartao,
+            expires: {
+              month: api.mesVencimento,
+              year: api.anoVencimento
+            }
+          }
+        },
+        products: [
+          {
+            id: 1,
+            price: 100
+          }
+        ]
+      })
+      dispatch(alteraEstadoCarrinho('finalizado'))
     }
   })
 
@@ -53,6 +88,7 @@ const Pagamento = () => {
     }
     return ''
   }
+
   return (
     <>
       <Form onSubmit={formPagamento.handleSubmit}>
@@ -142,21 +178,18 @@ const Pagamento = () => {
             </small>
           </div>
         </div>
+        <Botoes>
+          <Button type="submit">Finalizar pagamento</Button>
+          <Button
+            type="button"
+            onClick={() => {
+              isSuccess && dispatch(alteraEstadoCarrinho('endereco'))
+            }}
+          >
+            Voltar para a edição de endereço
+          </Button>
+        </Botoes>
       </Form>
-      <Botoes>
-        <Button
-          type="submit"
-          onClick={() => dispatch(alteraEstadoCarrinho('finalizado'))}
-        >
-          Finalizar pagamento
-        </Button>
-        <Button
-          type="button"
-          onClick={() => dispatch(alteraEstadoCarrinho('endereco'))}
-        >
-          Voltar para a edição de endereço
-        </Button>
-      </Botoes>
     </>
   )
 }

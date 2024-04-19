@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux'
 import Carrinho from '../Carrinho'
-import Entrega from '../Entrega'
-import Pagamento from '../Pagamento'
-import PedidoRealizado from '../PedidoRealizado'
+import Entrega from './Entrega'
+import Pagamento from './Pagamento'
+import PedidoRealizado from './PedidoRealizado'
 import { BarraLateral as Barra } from './styles'
 import { RootReducer } from '../../store'
 

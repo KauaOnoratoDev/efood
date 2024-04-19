@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Button, Cores } from '../../styles'
+import { Button, Cores } from '../../../styles'
 
 export const Container = styled.div`
   color: ${Cores.areia};

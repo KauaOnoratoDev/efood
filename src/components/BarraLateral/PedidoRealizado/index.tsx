@@ -1,6 +1,9 @@
 import { useDispatch } from 'react-redux'
-import { alteraEstadoCarrinho, zerarCarrinho } from '../../store/reducers/cart'
-import { Button } from '../../styles'
+import {
+  alteraEstadoCarrinho,
+  zerarCarrinho
+} from '../../../store/reducers/cart'
+import { Button } from '../../../styles'
 import { Container } from './styles'
 
 const PedidoRealizado = () => {

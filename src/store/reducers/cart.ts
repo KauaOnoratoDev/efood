@@ -1,11 +1,25 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Cardapio } from '../../pages/Home'
 
+export type Api = {
+  anoVencimento: number
+  cep: number
+  cidade: string
+  codigoCartao: number
+  complemento: string
+  endereco: string
+  mesVencimento: number
+  nome: string
+  nomeCartao: string
+  num: number
+  numCartao: number
+}
+
 type CartState = {
   itemsCarrinho: Cardapio[]
   carrinhoEstado: boolean
   estado: 'carrinho' | 'endereco' | 'pagamento' | 'finalizado' | ''
-  api: object
+  api: Api
 }
 
 const initialState: CartState = {
@@ -21,7 +35,19 @@ const initialState: CartState = {
   ],
   carrinhoEstado: false,
   estado: '',
-  api: {}
+  api: {
+    anoVencimento: 0,
+    cep: 0,
+    cidade: '',
+    codigoCartao: 0,
+    complemento: '',
+    endereco: '',
+    mesVencimento: 0,
+    nome: '',
+    nomeCartao: '',
+    num: 0,
+    numCartao: 0
+  }
 }
 
 const cartSlice = createSlice({
@@ -44,11 +70,11 @@ const cartSlice = createSlice({
         (i) => i.id != action.payload
       )
     },
-    zerarCarrinho: (state, action: PayloadAction) => {
+    zerarCarrinho: (state) => {
       state.itemsCarrinho = []
     },
     adicionarApi: (state, action: PayloadAction<object>) => {
-      state.api = action.payload
+      state.api = { ...state.api, ...action.payload }
     }
   }
 })

@@ -1,9 +1,14 @@
 import { useDispatch } from 'react-redux'
-import { Button } from '../../styles'
-import { Botoes, Form, Input } from './styles'
-import { adicionarApi, alteraEstadoCarrinho } from '../../store/reducers/cart'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+
+import { Button } from '../../../styles'
+import { Botoes, Form, Input } from './styles'
+import {
+  adicionarApi,
+  alteraEstadoCarrinho
+} from '../../../store/reducers/cart'
+import { usePurchaseMutation } from '../../../services/api'
 
 const Entrega = () => {
   const dispatch = useDispatch()
@@ -24,8 +29,8 @@ const Entrega = () => {
       endereco: Yup.string().required('O campo é obrigatório'),
       cidade: Yup.string().required('O campo é obrigatório'),
       cep: Yup.string()
-        .min(8, 'O cep precisa ter pelo menos 8 caracteres')
-        .max(8, 'O cep precisa ter 8 caracteres')
+        .min(7, 'O cep precisa ter pelo menos 7 caracteres')
+        .max(7, 'O cep precisa ter 7 caracteres')
         .required('O campo é obrigatório'),
       num: Yup.string()
         .min(11, 'O numero precisa ter pelo menos 11 caracteres')
@@ -34,10 +39,10 @@ const Entrega = () => {
       complemento: Yup.string()
     }),
     onSubmit: (values) => {
-      console.log(values)
+      dispatch(adicionarApi(values))
+      dispatch(alteraEstadoCarrinho('pagamento'))
     }
   })
-  console.log(formEntrega)
 
   const getErrorMessage = (fieldName: string, message?: string) => {
     const isTouched = fieldName in formEntrega.touched
@@ -129,15 +134,7 @@ const Entrega = () => {
           />
         </div>
         <Botoes>
-          <Button
-            type="submit"
-            onClick={() => {
-              dispatch(alteraEstadoCarrinho('pagamento'))
-              dispatch(adicionarApi(formEntrega.values))
-            }}
-          >
-            Continuar com o pagamento
-          </Button>
+          <Button type="submit">Continuar com o pagamento</Button>
           <Button
             type="button"
             onClick={() => dispatch(alteraEstadoCarrinho('carrinho'))}
