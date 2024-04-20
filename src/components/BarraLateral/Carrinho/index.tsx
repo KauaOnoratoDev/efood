@@ -4,7 +4,7 @@ import { parseToBrl, somaCarrinho } from '../../../utils'
 import { alteraEstadoCarrinho, remove } from '../../../store/reducers/cart'
 import { RootReducer } from '../../../store'
 
-import lixeira from '../../assets/images/lixeira.png'
+import lixeira from '../../../assets/images/lixeira.png'
 import * as S from './styles'
 import { Button } from '../../../styles'
 
