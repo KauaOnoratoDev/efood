@@ -24,16 +24,7 @@ type CartState = {
 }
 
 const initialState: CartState = {
-  itemsCarrinho: [
-    {
-      descricao: '',
-      foto: '',
-      id: 1,
-      nome: 'Prato teste',
-      porcao: '',
-      preco: 65.5
-    }
-  ],
+  itemsCarrinho: [],
   carrinhoEstado: false,
   estado: '',
   api: {

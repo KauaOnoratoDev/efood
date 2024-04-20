@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 
 import BarraLateral from '../BarraLateral'
 import DetalhesComida from '../DetalhesComida'
+import Loader from '../Loader'
 
 import { useGetCardapioQuery } from '../../services/api'
 import { RootReducer } from '../../store'
@@ -13,6 +14,7 @@ import { Props } from '../Cards'
 
 import { Button, Fundo } from '../../styles'
 import * as S from './styles'
+import { Params } from '../Banner'
 
 const Cardapio = ({ titleButton }: Props) => {
   const { estado, itemsCarrinho } = useSelector(
@@ -27,12 +29,11 @@ const Cardapio = ({ titleButton }: Props) => {
   const [porcao, setPorcao] = useState('')
   const [preco, setPreco] = useState(0)
 
-  const { id } = useParams()
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const { data: restaurantes } = useGetCardapioQuery(id!)
+  const { id } = useParams() as Params
+  const { data: restaurantes } = useGetCardapioQuery(id)
 
   if (!restaurantes) {
-    return <>Carregando...</>
+    return <Loader />
   }
 
   return (

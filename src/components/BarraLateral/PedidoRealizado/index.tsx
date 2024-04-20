@@ -8,8 +8,10 @@ import { RootReducer } from '../../../store'
 
 import { Button } from '../../../styles'
 import { Container } from './styles'
+import { useNavigate } from 'react-router-dom'
 
 const PedidoRealizado = () => {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const { data } = useSelector((state: RootReducer) => state.cart)
 
@@ -34,6 +36,7 @@ const PedidoRealizado = () => {
           dispatch(alteraEstadoCarrinho(''))
           dispatch(zerarCarrinho())
           alert('Seu pedido foi realizado com sucesso!')
+          navigate('/')
         }}
       >
         Concluir

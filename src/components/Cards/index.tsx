@@ -5,13 +5,19 @@ import { Restaurantes } from '../../pages/Home'
 
 import * as S from './styles'
 import { Button } from '../../styles'
+import Loader from '../Loader'
 
 export type Props = {
   titleButton: string
   restaurantes?: Restaurantes[]
+  isLoading?: boolean
 }
 
-const Card = ({ titleButton, restaurantes }: Props) => {
+const Card = ({ titleButton, restaurantes, isLoading }: Props) => {
+  if (isLoading) {
+    return <Loader />
+  }
+
   return (
     <>
       <S.Container>

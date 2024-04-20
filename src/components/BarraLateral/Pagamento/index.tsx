@@ -35,7 +35,7 @@ const Pagamento = () => {
         .max(3)
         .required('O campo é obrigatório'),
       mesVencimento: Yup.string()
-        .min(2, 'O mes de vencimento precisa ter 2 caracteres')
+        .min(1, 'O mes de vencimento precisa ter 2 caracteres')
         .max(2)
         .required('O campo é obrigatório'),
       anoVencimento: Yup.string()

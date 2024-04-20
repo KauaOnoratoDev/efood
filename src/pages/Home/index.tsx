@@ -25,12 +25,16 @@ export type Restaurantes = {
 }
 
 const Home = () => {
-  const { data: restaurantes } = useGetRestaurantesQuery()
+  const { data: restaurantes, isLoading } = useGetRestaurantesQuery()
 
   return (
     <>
       <Header />
-      <Card restaurantes={restaurantes} titleButton="Saiba mais" />
+      <Card
+        isLoading={isLoading}
+        restaurantes={restaurantes}
+        titleButton="Saiba mais"
+      />
       <Footer />
     </>
   )
