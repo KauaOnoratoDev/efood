@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import { Button, Cores } from '../../styles'
+import { Button, colors, breakpoints } from '../../styles'
 
 export const Container = styled.div`
-  background-color: ${Cores.areia};
+  background-color: ${colors.sand};
   padding: 64px 0;
 
   .container {
@@ -22,10 +22,23 @@ export const Container = styled.div`
       }
     }
 
+    @media (max-width: ${breakpoints.tablet}) {
+      flex-direction: column;
+
+      .restaurantes:before {
+        content: '<';
+        margin-right: 8px;
+      }
+
+      img {
+        margin: 16px 0;
+      }
+    }
+
     ${Button} {
       background-color: transparent;
       border: none;
-      color: ${Cores.laranja};
+      color: ${colors.orange};
       font-size: 18px;
       line-height: 21px;
       font-weight: bold;
@@ -51,7 +64,7 @@ export const Img = styled.img`
 `
 
 export const Title = styled.h1`
-  color: ${Cores.laranja};
+  color: ${colors.orange};
   font-size: 18px;
   line-height: 21px;
   transition: ease 0.1s;

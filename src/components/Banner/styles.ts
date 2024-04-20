@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Cores } from '../../styles'
+import { colors } from '../../styles'
 import { Props } from '.'
 
 export const Container = styled.div<Props>`
@@ -8,7 +8,7 @@ export const Container = styled.div<Props>`
   background-repeat: no-repeat;
   background-position: center;
   height: 280px;
-  color: ${Cores.branco};
+  color: ${colors.white};
 
   .fundo {
     width: 100%;

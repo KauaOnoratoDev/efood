@@ -2,32 +2,22 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
-import { Button, Fundo } from '../../styles'
-import { Props } from '../Cards'
-import {
-  Botao,
-  Cards,
-  Container,
-  Conteudo,
-  Detalhes,
-  List,
-  Text
-} from './styles'
+import BarraLateral from '../BarraLateral'
 import DetalhesComida from '../DetalhesComida'
+import Loader from '../Loader'
+
 import { useGetCardapioQuery } from '../../services/api'
-import Carrinho from '../Carrinho'
 import { RootReducer } from '../../store'
 import { alteraEstadoCarrinho } from '../../store/reducers/cart'
+import { parseToBrl } from '../../utils'
+import { Props } from '../Cards'
 
-export const formataPreco = (preco: number) => {
-  return new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
-  }).format(preco)
-}
+import { Button, Fundo } from '../../styles'
+import * as S from './styles'
+import { Params } from '../Banner'
 
 const Cardapio = ({ titleButton }: Props) => {
-  const { carrinhoEstado, itemsCarrinho } = useSelector(
+  const { estado, itemsCarrinho } = useSelector(
     (state: RootReducer) => state.cart
   )
   const dispatch = useDispatch()
@@ -39,26 +29,25 @@ const Cardapio = ({ titleButton }: Props) => {
   const [porcao, setPorcao] = useState('')
   const [preco, setPreco] = useState(0)
 
-  const { id } = useParams()
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const { data: restaurantes } = useGetCardapioQuery(id!)
+  const { id } = useParams() as Params
+  const { data: restaurantes } = useGetCardapioQuery(id)
 
   if (!restaurantes) {
-    return <>Carregando...</>
+    return <Loader />
   }
 
   return (
     <>
-      <Container>
+      <S.Container>
         <div className="container">
-          <List>
+          <S.List>
             {restaurantes.cardapio.map((x) => (
-              <Cards key={x.id}>
+              <S.Cards key={x.id}>
                 <img src={x.foto} alt="" />
-                <Conteudo>
+                <S.Conteudo>
                   <h2>{x.nome}</h2>
-                  <Text>{x.descricao}</Text>
-                  <b>{formataPreco(x.preco)}</b>
+                  <S.Text>{x.descricao}</S.Text>
+                  <b>{parseToBrl(x.preco)}</b>
                   <Button
                     type="button"
                     onClick={() => {
@@ -72,16 +61,16 @@ const Cardapio = ({ titleButton }: Props) => {
                   >
                     {titleButton}
                   </Button>
-                </Conteudo>
-              </Cards>
+                </S.Conteudo>
+              </S.Cards>
             ))}
-          </List>
+          </S.List>
         </div>
-      </Container>
+      </S.Container>
       {detalhes && (
         <>
           <Fundo onClick={() => setDetalhes(false)} />
-          <Detalhes>
+          <S.Detalhes>
             <DetalhesComida
               nome={nome}
               descricao={descricao}
@@ -89,14 +78,14 @@ const Cardapio = ({ titleButton }: Props) => {
               porcao={porcao}
               preco={preco}
             />
-            <Botao onClick={() => setDetalhes(false)}>X</Botao>
-          </Detalhes>
+            <S.Botao onClick={() => setDetalhes(false)}>X</S.Botao>
+          </S.Detalhes>
         </>
       )}
-      {itemsCarrinho.length > 0 && carrinhoEstado && (
+      {itemsCarrinho.length > 0 && estado !== '' && (
         <>
-          <Fundo onClick={() => dispatch(alteraEstadoCarrinho(false))} />
-          <Carrinho />
+          <Fundo onClick={() => dispatch(alteraEstadoCarrinho(''))} />
+          <BarraLateral />
         </>
       )}
     </>

@@ -1,29 +1,37 @@
 import { Link } from 'react-router-dom'
-import { Cards, Container, Conteudo, List, Tags, Text } from './styles'
-import { Button } from '../../styles'
+
 import estrela from '../../assets/images/estrela.png'
 import { Restaurantes } from '../../pages/Home'
+
+import * as S from './styles'
+import { Button } from '../../styles'
+import Loader from '../Loader'
 
 export type Props = {
   titleButton: string
   restaurantes?: Restaurantes[]
+  isLoading?: boolean
 }
 
-const Card = ({ titleButton, restaurantes }: Props) => {
+const Card = ({ titleButton, restaurantes, isLoading }: Props) => {
+  if (isLoading) {
+    return <Loader />
+  }
+
   return (
     <>
-      <Container>
+      <S.Container>
         <div className="container">
-          <List>
+          <S.List>
             {restaurantes &&
               restaurantes.map((i) => (
-                <Cards key={i.id}>
+                <S.Cards key={i.id}>
                   <img src={i.capa} alt="" />
-                  <Tags>
+                  <S.Tags>
                     {i.destacado && <span>Destaque da semana</span>}
                     <span>{i.tipo}</span>
-                  </Tags>
-                  <Conteudo>
+                  </S.Tags>
+                  <S.Conteudo>
                     <div>
                       <h2>{i.titulo}</h2>
                       <div>
@@ -31,16 +39,16 @@ const Card = ({ titleButton, restaurantes }: Props) => {
                         <img src={estrela} alt="" />
                       </div>
                     </div>
-                    <Text>{i.descricao}</Text>
+                    <S.Text>{i.descricao}</S.Text>
                     <Button type="button">
                       <Link to={`restaurantes/${i.id}`}>{titleButton}</Link>
                     </Button>
-                  </Conteudo>
-                </Cards>
+                  </S.Conteudo>
+                </S.Cards>
               ))}
-          </List>
+          </S.List>
         </div>
-      </Container>
+      </S.Container>
     </>
   )
 }

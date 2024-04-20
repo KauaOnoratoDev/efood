@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import { Cores } from '../../styles'
+import { colors } from '../../styles'
 
 export const Container = styled.div`
-  background-color: ${Cores.areia};
+  background-color: ${colors.sand};
   padding: 40px 0;
 
   .container {
@@ -33,7 +33,7 @@ export const List = styled.ul`
 `
 
 export const Text = styled.p`
-  color: ${Cores.laranja};
+  color: ${colors.orange};
   font-size: 10px;
   line-height: 10px;
 `

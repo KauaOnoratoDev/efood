@@ -1,15 +1,15 @@
 import logo from '../../assets/images/logo.png'
-import { Container, Img, Title } from './styles'
+import * as S from './styles'
 
 const Header = () => (
-  <Container>
+  <S.Container>
     <div className="container">
-      <Img src={logo} alt="logo" />
-      <Title>
+      <S.Img src={logo} alt="logo" />
+      <S.Title>
         Viva experiências gastronômicas <br /> no conforto da sua casa
-      </Title>
+      </S.Title>
     </div>
-  </Container>
+  </S.Container>
 )
 
 export default Header

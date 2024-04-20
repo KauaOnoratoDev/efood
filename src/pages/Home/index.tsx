@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import Card from '../../components/Cards'
+
 import { useGetRestaurantesQuery } from '../../services/api'
 
 export type Cardapio = {
@@ -30,7 +30,11 @@ const Home = () => {
   return (
     <>
       <Header />
-      <Card restaurantes={restaurantes} titleButton="Saiba mais" />
+      <Card
+        isLoading={isLoading}
+        restaurantes={restaurantes}
+        titleButton="Saiba mais"
+      />
       <Footer />
     </>
   )

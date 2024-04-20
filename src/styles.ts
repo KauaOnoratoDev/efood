@@ -1,5 +1,10 @@
 import styled, { createGlobalStyle } from 'styled-components'
 
+export const breakpoints = {
+  tablet: '768px',
+  desktop: '1024px'
+}
+
 export const GlobalStyle = createGlobalStyle`
     * {
         margin: 0;
@@ -8,19 +13,28 @@ export const GlobalStyle = createGlobalStyle`
         font-family: "Roboto", sans-serif;
         list-style: none;
         text-decoration: none;
+
+        .error {
+          border: 2px solid red;
+        }
     }
 
     .container {
         max-width: 1024px;
         width: 100%;
         margin: 0 auto;
+
+        @media (max-width: ${breakpoints.tablet}) {
+          max-width: 80%;
+        }
     }
+
 `
 
-export const Cores = {
-  areia: '#FFEBD9',
-  laranja: '#E66767',
-  branco: '#fff'
+export const colors = {
+  sand: '#FFEBD9',
+  orange: '#E66767',
+  white: '#fff'
 }
 
 export const Button = styled.button`

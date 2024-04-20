@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom'
-import logo from '../../assets/images/logo.png'
-import { Container, Img, Title } from './styles'
-import { Button } from '../../styles'
 import { useDispatch, useSelector } from 'react-redux'
+
 import { alteraEstadoCarrinho } from '../../store/reducers/cart'
 import { RootReducer } from '../../store'
+
+import logo from '../../assets/images/logo.png'
+import * as S from './styles'
+import { Button } from '../../styles'
 
 const HeaderCardapio = () => {
   const dispatch = useDispatch()
@@ -12,24 +14,20 @@ const HeaderCardapio = () => {
 
   return (
     <>
-      <Container>
+      <S.Container>
         <div className="container">
           <Link to={'/'}>
-            <Title className="restaurantes">Restaurantes</Title>
+            <S.Title className="restaurantes">Restaurantes</S.Title>
           </Link>
-          <Img src={logo} alt="logo" />
+          <S.Img src={logo} alt="logo" />
           <Button
             type="button"
-            onClick={() =>
-              itemsCarrinho.length > 0
-                ? dispatch(alteraEstadoCarrinho(true))
-                : alert('Adicione pelo menos um item no carrinho')
-            }
+            onClick={() => dispatch(alteraEstadoCarrinho('carrinho'))}
           >
             <span>{itemsCarrinho.length}</span> produto(s) no carrinho
           </Button>
         </div>
-      </Container>
+      </S.Container>
     </>
   )
 }

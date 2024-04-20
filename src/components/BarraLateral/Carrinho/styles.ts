@@ -1,27 +1,11 @@
 import styled from 'styled-components'
-import { Button, Cores } from '../../styles'
-
-export const BarraLateral = styled.aside`
-  display: flex;
-  flex-direction: column;
-  align-items: end;
-  background-color: ${Cores.laranja};
-  padding: 32px 8px;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  right: 0;
-  color: ${Cores.laranja};
-
-  ul {
-    overflow-y: auto;
-  }
-`
+import { Button, colors } from '../../../styles'
 
 export const ListLink = styled.li`
-  background-color: ${Cores.areia};
+  background-color: ${colors.sand};
   margin-bottom: 16px;
   width: 344px;
+  color: ${colors.orange};
 
   > div {
     display: flex;
@@ -75,13 +59,13 @@ export const AreaConfirmacao = styled.div`
     justify-content: space-between;
     font-weight: bold;
     font-size: 14px;
-    color: ${Cores.areia};
+    color: ${colors.sand};
     margin-bottom: 16px;
   }
 
   ${Button} {
     width: 100%;
-    color: ${Cores.laranja};
-    background-color: ${Cores.areia};
+    color: ${colors.orange};
+    background-color: ${colors.sand};
   }
 `
