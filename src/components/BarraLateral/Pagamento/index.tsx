@@ -12,10 +12,11 @@ import { usePurchaseMutation } from '../../../services/api'
 
 import { Button } from '../../../styles'
 import * as S from './styles'
+import { parseToBrl, somaCarrinho } from '../../../utils'
 
 const Pagamento = () => {
   const dispatch = useDispatch()
-  const { api } = useSelector((state: RootReducer) => state.cart)
+  const { api, itemsCarrinho } = useSelector((state: RootReducer) => state.cart)
   const [purchase, { isSuccess, data }] = usePurchaseMutation()
 
   const formPagamento = useFormik({
@@ -96,7 +97,8 @@ const Pagamento = () => {
     <>
       <S.Form onSubmit={formPagamento.handleSubmit}>
         <h3>
-          Pagamento - Valor total a pagar <span>R$ 100,00</span>
+          Pagamento - Valor total a pagar{' '}
+          <span>{parseToBrl(somaCarrinho(itemsCarrinho))}</span>
         </h3>
         <div>
           <label htmlFor="nomeCartao">Nome no cartão</label>
