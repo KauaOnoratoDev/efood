@@ -1,19 +1,22 @@
 import { useDispatch, useSelector } from 'react-redux'
 import * as Yup from 'yup'
-import { Button } from '../../../styles'
-import { Botoes, Form, Input } from './styles'
+import { useFormik } from 'formik'
+
 import {
   adicionarApi,
+  adicionarData,
   alteraEstadoCarrinho
 } from '../../../store/reducers/cart'
-import { useFormik } from 'formik'
 import { RootReducer } from '../../../store'
 import { usePurchaseMutation } from '../../../services/api'
+
+import { Button } from '../../../styles'
+import * as S from './styles'
 
 const Pagamento = () => {
   const dispatch = useDispatch()
   const { api } = useSelector((state: RootReducer) => state.cart)
-  const [purchase, { isSuccess, isError, data }] = usePurchaseMutation()
+  const [purchase, { isSuccess, data }] = usePurchaseMutation()
 
   const formPagamento = useFormik({
     initialValues: {
@@ -75,7 +78,9 @@ const Pagamento = () => {
           }
         ]
       })
-      dispatch(alteraEstadoCarrinho('finalizado'))
+      isSuccess &&
+        (dispatch(alteraEstadoCarrinho('finalizado')),
+        dispatch(adicionarData(data.orderId)))
     }
   })
 
@@ -91,13 +96,13 @@ const Pagamento = () => {
 
   return (
     <>
-      <Form onSubmit={formPagamento.handleSubmit}>
+      <S.Form onSubmit={formPagamento.handleSubmit}>
         <h3>
           Pagamento - Valor total a pagar <span>R$ 100,00</span>
         </h3>
         <div>
           <label htmlFor="nomeCartao">Nome no cartão</label>
-          <Input
+          <S.Input
             type="text"
             id="nomeCartao"
             name="nomeCartao"
@@ -112,7 +117,7 @@ const Pagamento = () => {
         <div>
           <div>
             <label htmlFor="numCartao">Número no cartão</label>
-            <Input
+            <S.Input
               type="number"
               id="numCartao"
               name="numCartao"
@@ -126,7 +131,7 @@ const Pagamento = () => {
           </div>
           <div>
             <label htmlFor="codigoCartao">CVV</label>
-            <Input
+            <S.Input
               type="num"
               id="codigoCartao"
               name="codigoCartao"
@@ -145,7 +150,7 @@ const Pagamento = () => {
         <div>
           <div>
             <label htmlFor="mesVencimento">Mês de vencimento</label>
-            <Input
+            <S.Input
               type="number"
               id="mesVencimento"
               name="mesVencimento"
@@ -162,7 +167,7 @@ const Pagamento = () => {
           </div>
           <div>
             <label htmlFor="anoVencimento">Ano de vencimento</label>
-            <Input
+            <S.Input
               type="number"
               id="anoVencimento"
               name="anoVencimento"
@@ -178,18 +183,18 @@ const Pagamento = () => {
             </small>
           </div>
         </div>
-        <Botoes>
+        <S.Botoes>
           <Button type="submit">Finalizar pagamento</Button>
           <Button
             type="button"
             onClick={() => {
-              isSuccess && dispatch(alteraEstadoCarrinho('endereco'))
+              dispatch(alteraEstadoCarrinho('endereco'))
             }}
           >
             Voltar para a edição de endereço
           </Button>
-        </Botoes>
-      </Form>
+        </S.Botoes>
+      </S.Form>
     </>
   )
 }

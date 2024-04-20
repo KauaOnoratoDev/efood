@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import Card from '../../components/Cards'
+
 import { useGetRestaurantesQuery } from '../../services/api'
 
 export type Cardapio = {
@@ -25,7 +25,7 @@ export type Restaurantes = {
 }
 
 const Home = () => {
-  const { data: restaurantes, isLoading } = useGetRestaurantesQuery()
+  const { data: restaurantes } = useGetRestaurantesQuery()
 
   return (
     <>

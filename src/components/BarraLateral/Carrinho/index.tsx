@@ -1,44 +1,39 @@
 import { useDispatch, useSelector } from 'react-redux'
+
+import { parseToBrl, somaCarrinho } from '../../../utils'
+import { alteraEstadoCarrinho, remove } from '../../../store/reducers/cart'
+import { RootReducer } from '../../../store'
+
 import lixeira from '../../assets/images/lixeira.png'
-import { Button } from '../../styles'
-import { AreaConfirmacao, ListLink, Lixeira } from './styles'
-import { RootReducer } from '../../store'
-import { formataPreco } from '../Cardapio'
-import { Cardapio } from '../../pages/Home'
-import { alteraEstadoCarrinho, remove } from '../../store/reducers/cart'
+import * as S from './styles'
+import { Button } from '../../../styles'
 
 const Carrinho = () => {
   const { itemsCarrinho } = useSelector((state: RootReducer) => state.cart)
   const dispatch = useDispatch()
 
-  const somaCarrinho = (item: Cardapio[]) => {
-    return item.reduce((acumulador, itemAtual) => {
-      return (acumulador += itemAtual.preco)
-    }, 0)
-  }
-
   return (
     <>
       <ul>
         {itemsCarrinho.map((i) => (
-          <ListLink key={i.id}>
+          <S.ListLink key={i.id}>
             <div>
               <img src={i.foto} alt="" />
               <div>
                 <h3>{i.nome}</h3>
-                <span>{formataPreco(i.preco)}</span>
+                <span>{parseToBrl(i.preco)}</span>
               </div>
-              <Lixeira type="button" onClick={() => dispatch(remove(i.id))}>
+              <S.Lixeira type="button" onClick={() => dispatch(remove(i.id))}>
                 <img src={lixeira} alt="" />
-              </Lixeira>
+              </S.Lixeira>
             </div>
-          </ListLink>
+          </S.ListLink>
         ))}
       </ul>
-      <AreaConfirmacao>
+      <S.AreaConfirmacao>
         <div>
           <h5>Valor total</h5>
-          <span>{formataPreco(somaCarrinho(itemsCarrinho))}</span>
+          <span>{parseToBrl(somaCarrinho(itemsCarrinho))}</span>
         </div>
         <Button
           type="button"
@@ -46,7 +41,7 @@ const Carrinho = () => {
         >
           Continuar com a entrega
         </Button>
-      </AreaConfirmacao>
+      </S.AreaConfirmacao>
     </>
   )
 }

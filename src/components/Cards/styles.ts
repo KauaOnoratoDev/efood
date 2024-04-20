@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Button, Cores, breakpoints } from '../../styles'
+import { Button, colors, breakpoints } from '../../styles'
 
 export const Container = styled.div`
   padding: 80px 0 120px;
@@ -7,7 +7,7 @@ export const Container = styled.div`
 
 export const List = styled.ul`
   grid-template-columns: 1fr 1fr;
-  color: ${Cores.laranja};
+  color: ${colors.orange};
   column-gap: 80px;
   display: grid;
   row-gap: 32px;
@@ -18,7 +18,7 @@ export const List = styled.ul`
 `
 
 export const Cards = styled.li`
-  background-color: ${Cores.branco};
+  background-color: ${colors.white};
   position: relative;
   display: flex;
   flex-direction: column;
@@ -43,8 +43,8 @@ export const Tags = styled.div`
   right: 16px;
 
   span {
-    background-color: ${Cores.laranja};
-    color: ${Cores.branco};
+    background-color: ${colors.orange};
+    color: ${colors.white};
     padding: 6px 12px;
     font-size: 12px;
     font-weight: bold;
@@ -53,7 +53,7 @@ export const Tags = styled.div`
 `
 
 export const Conteudo = styled.div`
-  border: 1px solid ${Cores.laranja};
+  border: 1px solid ${colors.orange};
   border-top: none;
   padding: 8px;
   display: flex;
@@ -67,11 +67,11 @@ export const Conteudo = styled.div`
   }
 
   ${Button} {
-    background-color: ${Cores.laranja};
+    background-color: ${colors.orange};
     width: 100px;
 
     a {
-      color: ${Cores.branco};
+      color: ${colors.white};
     }
   }
 

@@ -2,29 +2,17 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
-import { Button, Fundo } from '../../styles'
-import { Props } from '../Cards'
-import {
-  Botao,
-  Cards,
-  Container,
-  Conteudo,
-  Detalhes,
-  List,
-  Text
-} from './styles'
+import BarraLateral from '../BarraLateral'
 import DetalhesComida from '../DetalhesComida'
+
 import { useGetCardapioQuery } from '../../services/api'
 import { RootReducer } from '../../store'
 import { alteraEstadoCarrinho } from '../../store/reducers/cart'
-import BarraLateral from '../BarraLateral'
+import { parseToBrl } from '../../utils'
+import { Props } from '../Cards'
 
-export const formataPreco = (preco: number) => {
-  return new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
-  }).format(preco)
-}
+import { Button, Fundo } from '../../styles'
+import * as S from './styles'
 
 const Cardapio = ({ titleButton }: Props) => {
   const { estado, itemsCarrinho } = useSelector(
@@ -49,16 +37,16 @@ const Cardapio = ({ titleButton }: Props) => {
 
   return (
     <>
-      <Container>
+      <S.Container>
         <div className="container">
-          <List>
+          <S.List>
             {restaurantes.cardapio.map((x) => (
-              <Cards key={x.id}>
+              <S.Cards key={x.id}>
                 <img src={x.foto} alt="" />
-                <Conteudo>
+                <S.Conteudo>
                   <h2>{x.nome}</h2>
-                  <Text>{x.descricao}</Text>
-                  <b>{formataPreco(x.preco)}</b>
+                  <S.Text>{x.descricao}</S.Text>
+                  <b>{parseToBrl(x.preco)}</b>
                   <Button
                     type="button"
                     onClick={() => {
@@ -72,16 +60,16 @@ const Cardapio = ({ titleButton }: Props) => {
                   >
                     {titleButton}
                   </Button>
-                </Conteudo>
-              </Cards>
+                </S.Conteudo>
+              </S.Cards>
             ))}
-          </List>
+          </S.List>
         </div>
-      </Container>
+      </S.Container>
       {detalhes && (
         <>
           <Fundo onClick={() => setDetalhes(false)} />
-          <Detalhes>
+          <S.Detalhes>
             <DetalhesComida
               nome={nome}
               descricao={descricao}
@@ -89,8 +77,8 @@ const Cardapio = ({ titleButton }: Props) => {
               porcao={porcao}
               preco={preco}
             />
-            <Botao onClick={() => setDetalhes(false)}>X</Botao>
-          </Detalhes>
+            <S.Botao onClick={() => setDetalhes(false)}>X</S.Botao>
+          </S.Detalhes>
         </>
       )}
       {itemsCarrinho.length > 0 && estado !== '' && (

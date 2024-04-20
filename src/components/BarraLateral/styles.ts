@@ -1,11 +1,11 @@
 import { styled } from 'styled-components'
-import { Cores, breakpoints } from '../../styles'
+import { colors, breakpoints } from '../../styles'
 
 export const BarraLateral = styled.aside`
   display: flex;
   flex-direction: column;
   align-items: end;
-  background-color: ${Cores.laranja};
+  background-color: ${colors.orange};
   padding: 32px 8px;
   height: 100%;
   position: fixed;

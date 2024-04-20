@@ -1,10 +1,10 @@
 import styled from 'styled-components'
-import { Button, Cores } from '../../../styles'
+import { Button, colors } from '../../../styles'
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  color: ${Cores.branco};
+  color: ${colors.white};
   font-size: 14px;
   font-weight: bold;
   width: 100%;
@@ -36,8 +36,8 @@ export const Input = styled.input`
   padding: 8px;
   margin: 8px 0;
   width: 100%;
-  background-color: ${Cores.areia};
-  border: 1px solid ${Cores.areia};
+  background-color: ${colors.sand};
+  border: 1px solid ${colors.sand};
 `
 
 export const Botoes = styled.div`
@@ -47,7 +47,7 @@ export const Botoes = styled.div`
   ${Button} {
     width: 100%;
     margin-bottom: 8px;
-    background-color: ${Cores.areia};
-    color: ${Cores.laranja};
+    background-color: ${colors.sand};
+    color: ${colors.orange};
   }
 `

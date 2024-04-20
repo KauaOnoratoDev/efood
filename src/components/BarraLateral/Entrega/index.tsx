@@ -2,13 +2,13 @@ import { useDispatch } from 'react-redux'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
-import { Button } from '../../../styles'
-import { Botoes, Form, Input } from './styles'
 import {
   adicionarApi,
   alteraEstadoCarrinho
 } from '../../../store/reducers/cart'
-import { usePurchaseMutation } from '../../../services/api'
+
+import { Button } from '../../../styles'
+import * as S from './styles'
 
 const Entrega = () => {
   const dispatch = useDispatch()
@@ -54,13 +54,15 @@ const Entrega = () => {
     return ''
   }
 
+  console.log(formEntrega.values.cep.length)
+
   return (
     <>
-      <Form onSubmit={formEntrega.handleSubmit}>
+      <S.Form onSubmit={formEntrega.handleSubmit}>
         <h3>Entrega</h3>
         <div>
           <label htmlFor="nome">Quem irá receber</label>
-          <Input
+          <S.Input
             type="text"
             id="nome"
             name="nome"
@@ -72,7 +74,7 @@ const Entrega = () => {
         </div>
         <div>
           <label htmlFor="endereco">Endereço</label>
-          <Input
+          <S.Input
             type="text"
             id="endereco"
             name="endereco"
@@ -86,7 +88,7 @@ const Entrega = () => {
         </div>
         <div>
           <label htmlFor="cidade">Cidade</label>
-          <Input
+          <S.Input
             type="text"
             id="cidade"
             name="cidade"
@@ -99,8 +101,8 @@ const Entrega = () => {
         <div className="cepNum">
           <div>
             <label htmlFor="cep">CEP</label>
-            <Input
-              type="number"
+            <S.Input
+              type="text"
               id="cep"
               name="cep"
               value={formEntrega.values.cep}
@@ -111,7 +113,7 @@ const Entrega = () => {
           </div>
           <div>
             <label htmlFor="num">Número</label>
-            <Input
+            <S.Input
               type="number"
               id="num"
               name="num"
@@ -124,7 +126,7 @@ const Entrega = () => {
         </div>
         <div>
           <label htmlFor="complemento">Complemento (opcional)</label>
-          <Input
+          <S.Input
             type="text"
             id="complemento"
             name="complemento"
@@ -133,7 +135,7 @@ const Entrega = () => {
             onBlur={formEntrega.handleBlur}
           />
         </div>
-        <Botoes>
+        <S.Botoes>
           <Button type="submit">Continuar com o pagamento</Button>
           <Button
             type="button"
@@ -141,8 +143,8 @@ const Entrega = () => {
           >
             Voltar para o carrinho
           </Button>
-        </Botoes>
-      </Form>
+        </S.Botoes>
+      </S.Form>
     </>
   )
 }

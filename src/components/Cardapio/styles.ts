@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Button, Cores, breakpoints } from '../../styles'
+import { Button, colors, breakpoints } from '../../styles'
 
 export const Container = styled.div`
   padding: 80px 0 120px;
@@ -8,7 +8,7 @@ export const Container = styled.div`
 export const List = styled.ul`
   display: grid;
   grid-template-columns: 320px 320px 320px;
-  color: ${Cores.branco};
+  color: ${colors.white};
   gap: 32px;
 
   @media (max-width: ${breakpoints.tablet}) {
@@ -17,7 +17,7 @@ export const List = styled.ul`
 `
 
 export const Cards = styled.li`
-  background-color: ${Cores.laranja};
+  background-color: ${colors.orange};
   position: relative;
   display: flex;
   flex-direction: column;
@@ -38,7 +38,7 @@ export const Cards = styled.li`
 `
 
 export const Conteudo = styled.div`
-  border: 1px solid ${Cores.laranja};
+  border: 1px solid ${colors.orange};
   border-top: none;
   padding: 8px;
   max-height: 338px;
@@ -48,8 +48,8 @@ export const Conteudo = styled.div`
   justify-content: space-between;
 
   ${Button} {
-    background-color: ${Cores.branco};
-    color: ${Cores.laranja};
+    background-color: ${colors.white};
+    color: ${colors.orange};
     margin-top: 4px;
   }
 `
@@ -67,7 +67,7 @@ export const Botao = styled.button`
   right: 16px;
   background-color: transparent;
   border: none;
-  color: ${Cores.branco};
+  color: ${colors.white};
   cursor: pointer;
   transition: 0.2s ease;
   font-size: 22px;

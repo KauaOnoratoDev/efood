@@ -1,17 +1,21 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+
 import {
   alteraEstadoCarrinho,
   zerarCarrinho
 } from '../../../store/reducers/cart'
+import { RootReducer } from '../../../store'
+
 import { Button } from '../../../styles'
 import { Container } from './styles'
 
 const PedidoRealizado = () => {
   const dispatch = useDispatch()
+  const { data } = useSelector((state: RootReducer) => state.cart)
 
   return (
     <Container>
-      <h3>Pedido realizado - (Order_ID)</h3>
+      <h3>Pedido realizado - ({data})</h3>
       <p>
         Estamos felizes em informar que seu pedido já está em processo de
         preparação e, em breve, será entregue no endereço fornecido. <br />{' '}

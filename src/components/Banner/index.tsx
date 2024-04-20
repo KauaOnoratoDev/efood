@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
-import { Restaurantes } from '../../pages/Home'
-import { Container, Title, Text } from './styles'
 import { useParams } from 'react-router-dom'
+
 import { useGetCardapioQuery } from '../../services/api'
+
+import * as S from './styles'
 
 export type Props = {
   banner: string
@@ -19,14 +19,14 @@ const Banner = () => {
 
   return (
     <>
-      <Container banner={restaurantes.capa}>
+      <S.Container banner={restaurantes.capa}>
         <div className="fundo">
           <div className="container">
-            <Text>{restaurantes.tipo}</Text>
-            <Title>{restaurantes.titulo}</Title>
+            <S.Text>{restaurantes.tipo}</S.Text>
+            <S.Title>{restaurantes.titulo}</S.Title>
           </div>
         </div>
-      </Container>
+      </S.Container>
     </>
   )
 }

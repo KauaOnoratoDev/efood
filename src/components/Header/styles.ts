@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import { Cores } from '../../styles'
+import { colors } from '../../styles'
 
 export const Container = styled.div`
-  background-color: ${Cores.areia};
+  background-color: ${colors.sand};
   padding-top: 64px;
   padding-bottom: 40px;
 
@@ -21,7 +21,7 @@ export const Img = styled.img`
 `
 
 export const Title = styled.h1`
-  color: ${Cores.laranja};
+  color: ${colors.orange};
   font-size: 36px;
   line-height: 42px;
 `

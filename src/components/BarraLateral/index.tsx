@@ -1,10 +1,13 @@
 import { useSelector } from 'react-redux'
-import Carrinho from '../Carrinho'
+
+import Carrinho from './Carrinho'
 import Entrega from './Entrega'
 import Pagamento from './Pagamento'
 import PedidoRealizado from './PedidoRealizado'
-import { BarraLateral as Barra } from './styles'
+
 import { RootReducer } from '../../store'
+
+import { BarraLateral as Barra } from './styles'
 
 const BarraLateral = () => {
   const { estado } = useSelector((state: RootReducer) => state.cart)

@@ -1,10 +1,10 @@
 import styled from 'styled-components'
-import { Button, Cores, breakpoints } from '../../styles'
+import { Button, colors, breakpoints } from '../../styles'
 
 export const Container = styled.div`
   padding: 32px;
-  background-color: ${Cores.laranja};
-  color: ${Cores.branco};
+  background-color: ${colors.orange};
+  color: ${colors.white};
   max-width: 960px;
   width: 100%;
   margin: 0 auto;
@@ -45,8 +45,8 @@ export const Conteudo = styled.div`
   }
 
   ${Button} {
-    background-color: ${Cores.branco};
-    color: ${Cores.laranja};
+    background-color: ${colors.white};
+    color: ${colors.orange};
     margin-top: 4px;
   }
 `

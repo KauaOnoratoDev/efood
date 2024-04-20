@@ -26,10 +26,10 @@ export const GlobalStyle = createGlobalStyle`
     }
 `
 
-export const Cores = {
-  areia: '#FFEBD9',
-  laranja: '#E66767',
-  branco: '#fff'
+export const colors = {
+  sand: '#FFEBD9',
+  orange: '#E66767',
+  white: '#fff'
 }
 
 export const Button = styled.button`

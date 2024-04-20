@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import { Button, Cores } from '../../../styles'
+import { Button, colors } from '../../../styles'
 
 export const Container = styled.div`
-  color: ${Cores.areia};
+  color: ${colors.sand};
 
   h3 {
     margin-bottom: 16px;
@@ -17,8 +17,8 @@ export const Container = styled.div`
 
   ${Button} {
     width: 100%;
-    background-color: ${Cores.areia};
-    color: ${Cores.laranja};
+    background-color: ${colors.sand};
+    color: ${colors.orange};
     margin-top: 24px;
   }
 `
