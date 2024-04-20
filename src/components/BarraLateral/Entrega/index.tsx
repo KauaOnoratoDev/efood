@@ -29,8 +29,8 @@ const Entrega = () => {
       endereco: Yup.string().required('O campo é obrigatório'),
       cidade: Yup.string().required('O campo é obrigatório'),
       cep: Yup.string()
-        .min(7, 'O cep precisa ter pelo menos 7 caracteres')
-        .max(7, 'O cep precisa ter 7 caracteres')
+        .min(9, 'O cep precisa ter pelo menos 7 caracteres')
+        .max(9, 'O cep precisa ter 7 caracteres')
         .required('O campo é obrigatório'),
       num: Yup.string()
         .min(11, 'O numero precisa ter pelo menos 11 caracteres')
@@ -44,17 +44,13 @@ const Entrega = () => {
     }
   })
 
-  const getErrorMessage = (fieldName: string, message?: string) => {
+  const getError = (fieldName: string) => {
     const isTouched = fieldName in formEntrega.touched
     const isValid = fieldName in formEntrega.errors
+    const hasError = isTouched && isValid
 
-    if (isTouched && isValid) {
-      return message
-    }
-    return ''
+    return hasError
   }
-
-  console.log(formEntrega.values.cep.length)
 
   return (
     <>
@@ -69,8 +65,8 @@ const Entrega = () => {
             value={formEntrega.values.nome}
             onChange={formEntrega.handleChange}
             onBlur={formEntrega.handleBlur}
+            className={getError('nome') ? 'error' : ''}
           />
-          <small>{getErrorMessage('nome', formEntrega.errors.nome)}</small>
         </div>
         <div>
           <label htmlFor="endereco">Endereço</label>
@@ -81,10 +77,8 @@ const Entrega = () => {
             value={formEntrega.values.endereco}
             onChange={formEntrega.handleChange}
             onBlur={formEntrega.handleBlur}
+            className={getError('endereco') ? 'error' : ''}
           />
-          <small>
-            {getErrorMessage('endereco', formEntrega.errors.endereco)}
-          </small>
         </div>
         <div>
           <label htmlFor="cidade">Cidade</label>
@@ -95,8 +89,8 @@ const Entrega = () => {
             value={formEntrega.values.cidade}
             onChange={formEntrega.handleChange}
             onBlur={formEntrega.handleBlur}
+            className={getError('cidade') ? 'error' : ''}
           />
-          <small>{getErrorMessage('cidade', formEntrega.errors.cidade)}</small>
         </div>
         <div className="cepNum">
           <div>
@@ -108,8 +102,8 @@ const Entrega = () => {
               value={formEntrega.values.cep}
               onChange={formEntrega.handleChange}
               onBlur={formEntrega.handleBlur}
+              className={getError('cep') ? 'error' : ''}
             />
-            <small>{getErrorMessage('cep', formEntrega.errors.cep)}</small>
           </div>
           <div>
             <label htmlFor="num">Número</label>
@@ -120,8 +114,8 @@ const Entrega = () => {
               value={formEntrega.values.num}
               onChange={formEntrega.handleChange}
               onBlur={formEntrega.handleBlur}
+              className={getError('num') ? 'error' : ''}
             />
-            <small>{getErrorMessage('num', formEntrega.errors.num)}</small>
           </div>
         </div>
         <div>

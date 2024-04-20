@@ -84,14 +84,12 @@ const Pagamento = () => {
     }
   })
 
-  const getErrorMessage = (fieldName: string, message?: string) => {
+  const getError = (fieldName: string) => {
     const isTouched = fieldName in formPagamento.touched
     const isValid = fieldName in formPagamento.errors
+    const hasError = isTouched && isValid
 
-    if (isTouched && isValid) {
-      return message
-    }
-    return ''
+    return hasError
   }
 
   return (
@@ -109,10 +107,8 @@ const Pagamento = () => {
             value={formPagamento.values.nomeCartao}
             onChange={formPagamento.handleChange}
             onBlur={formPagamento.handleBlur}
+            className={getError('nomeCartao') ? 'error' : ''}
           />
-          <small>
-            {getErrorMessage('nomeCartao', formPagamento.errors.nomeCartao)}
-          </small>
         </div>
         <div>
           <div>
@@ -124,10 +120,8 @@ const Pagamento = () => {
               value={formPagamento.values.numCartao}
               onChange={formPagamento.handleChange}
               onBlur={formPagamento.handleBlur}
+              className={getError('numCartao') ? 'error' : ''}
             />
-            <small>
-              {getErrorMessage('numCartao', formPagamento.errors.numCartao)}
-            </small>
           </div>
           <div>
             <label htmlFor="codigoCartao">CVV</label>
@@ -138,13 +132,8 @@ const Pagamento = () => {
               value={formPagamento.values.codigoCartao}
               onChange={formPagamento.handleChange}
               onBlur={formPagamento.handleBlur}
+              className={getError('codigoCartao') ? 'error' : ''}
             />
-            <small>
-              {getErrorMessage(
-                'codigoCartao',
-                formPagamento.errors.codigoCartao
-              )}
-            </small>
           </div>
         </div>
         <div>
@@ -157,13 +146,8 @@ const Pagamento = () => {
               value={formPagamento.values.mesVencimento}
               onChange={formPagamento.handleChange}
               onBlur={formPagamento.handleBlur}
+              className={getError('mesVencimento') ? 'error' : ''}
             />
-            <small>
-              {getErrorMessage(
-                'mesVencimento',
-                formPagamento.errors.mesVencimento
-              )}
-            </small>
           </div>
           <div>
             <label htmlFor="anoVencimento">Ano de vencimento</label>
@@ -174,13 +158,8 @@ const Pagamento = () => {
               value={formPagamento.values.anoVencimento}
               onChange={formPagamento.handleChange}
               onBlur={formPagamento.handleBlur}
+              className={getError('anoVencimento') ? 'error' : ''}
             />
-            <small>
-              {getErrorMessage(
-                'anoVencimento',
-                formPagamento.errors.anoVencimento
-              )}
-            </small>
           </div>
         </div>
         <S.Botoes>

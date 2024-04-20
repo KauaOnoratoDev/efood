@@ -13,6 +13,10 @@ export const GlobalStyle = createGlobalStyle`
         font-family: "Roboto", sans-serif;
         list-style: none;
         text-decoration: none;
+
+        .error {
+          border: 2px solid red;
+        }
     }
 
     .container {
@@ -24,6 +28,7 @@ export const GlobalStyle = createGlobalStyle`
           max-width: 80%;
         }
     }
+
 `
 
 export const colors = {

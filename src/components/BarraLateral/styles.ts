@@ -15,7 +15,6 @@ export const BarraLateral = styled.aside`
   width: 100%;
 
   @media (max-width: ${breakpoints.tablet}) {
-    max-width: none;
     align-items: center;
   }
 

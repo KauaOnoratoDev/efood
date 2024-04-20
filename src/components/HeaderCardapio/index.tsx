@@ -22,11 +22,7 @@ const HeaderCardapio = () => {
           <S.Img src={logo} alt="logo" />
           <Button
             type="button"
-            onClick={() =>
-              itemsCarrinho.length > 0
-                ? dispatch(alteraEstadoCarrinho('carrinho'))
-                : alert('Adicione pelo menos um item no carrinho')
-            }
+            onClick={() => dispatch(alteraEstadoCarrinho('carrinho'))}
           >
             <span>{itemsCarrinho.length}</span> produto(s) no carrinho
           </Button>
