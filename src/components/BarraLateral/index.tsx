@@ -10,14 +10,14 @@ import { RootReducer } from '../../store'
 import { BarraLateral as Barra } from './styles'
 
 const BarraLateral = () => {
-  const { estado } = useSelector((state: RootReducer) => state.cart)
+  const { estado, data } = useSelector((state: RootReducer) => state.cart)
 
   return (
     <Barra>
       {estado === 'carrinho' && <Carrinho />}
       {estado === 'endereco' && <Entrega />}
       {estado === 'pagamento' && <Pagamento />}
-      {estado === 'finalizado' && <PedidoRealizado />}
+      {estado === 'finalizado' && <PedidoRealizado data={data} />}
     </Barra>
   )
 }

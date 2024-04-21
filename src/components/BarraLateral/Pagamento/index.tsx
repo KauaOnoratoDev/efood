@@ -5,7 +5,8 @@ import InputMask from 'react-input-mask'
 
 import {
   adicionarData,
-  alteraEstadoCarrinho
+  alteraEstadoCarrinho,
+  zerarCarrinho
 } from '../../../store/reducers/cart'
 import { RootReducer } from '../../../store'
 import { usePurchaseMutation } from '../../../services/api'
@@ -13,11 +14,12 @@ import { usePurchaseMutation } from '../../../services/api'
 import { Button, Input } from '../../../styles'
 import * as S from './styles'
 import { parseToBrl, somaCarrinho } from '../../../utils'
+import { useEffect } from 'react'
 
 const Pagamento = () => {
   const dispatch = useDispatch()
   const { api, itemsCarrinho } = useSelector((state: RootReducer) => state.cart)
-  const [purchase, { data, isLoading }] = usePurchaseMutation()
+  const [purchase, { data, isLoading, isSuccess }] = usePurchaseMutation()
 
   const formPagamento = useFormik({
     initialValues: {
@@ -76,10 +78,15 @@ const Pagamento = () => {
           price: somaCarrinho(itemsCarrinho)
         }))
       })
-      data && dispatch(adicionarData(data.orderId))
-      dispatch(alteraEstadoCarrinho('finalizado'))
     }
   })
+
+  useEffect(() => {
+    data &&
+      (dispatch(adicionarData(data.orderId)),
+      dispatch(alteraEstadoCarrinho('finalizado')),
+      dispatch(zerarCarrinho()))
+  }, [data, dispatch])
 
   const getError = (fieldName: string) => {
     const isTouched = fieldName in formPagamento.touched
