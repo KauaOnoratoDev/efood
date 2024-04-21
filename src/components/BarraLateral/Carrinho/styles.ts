@@ -69,3 +69,9 @@ export const AreaConfirmacao = styled.div`
     background-color: ${colors.sand};
   }
 `
+
+export const CarrinhoVazio = styled.p`
+  text-align: center;
+  font-size: 16px;
+  color: ${colors.white};
+`

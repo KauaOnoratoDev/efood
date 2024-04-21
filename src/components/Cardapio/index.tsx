@@ -17,9 +17,7 @@ import * as S from './styles'
 import { Params } from '../Banner'
 
 const Cardapio = ({ titleButton }: Props) => {
-  const { estado, itemsCarrinho } = useSelector(
-    (state: RootReducer) => state.cart
-  )
+  const { estado } = useSelector((state: RootReducer) => state.cart)
   const dispatch = useDispatch()
 
   const [detalhes, setDetalhes] = useState(false)
@@ -82,7 +80,7 @@ const Cardapio = ({ titleButton }: Props) => {
           </S.Detalhes>
         </>
       )}
-      {itemsCarrinho.length > 0 && estado !== '' && (
+      {estado !== '' && (
         <>
           <Fundo onClick={() => dispatch(alteraEstadoCarrinho(''))} />
           <BarraLateral />

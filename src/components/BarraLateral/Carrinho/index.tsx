@@ -14,34 +14,45 @@ const Carrinho = () => {
 
   return (
     <>
-      <ul>
-        {itemsCarrinho.map((i) => (
-          <S.ListLink key={i.id}>
+      {itemsCarrinho.length > 0 ? (
+        <>
+          <ul>
+            {itemsCarrinho.map((i) => (
+              <S.ListLink key={i.id}>
+                <div>
+                  <img src={i.foto} alt="" />
+                  <div>
+                    <h3>{i.nome}</h3>
+                    <span>{parseToBrl(i.preco)}</span>
+                  </div>
+                  <S.Lixeira
+                    type="button"
+                    onClick={() => dispatch(remove(i.id))}
+                  >
+                    <img src={lixeira} alt="" />
+                  </S.Lixeira>
+                </div>
+              </S.ListLink>
+            ))}
+          </ul>
+          <S.AreaConfirmacao>
             <div>
-              <img src={i.foto} alt="" />
-              <div>
-                <h3>{i.nome}</h3>
-                <span>{parseToBrl(i.preco)}</span>
-              </div>
-              <S.Lixeira type="button" onClick={() => dispatch(remove(i.id))}>
-                <img src={lixeira} alt="" />
-              </S.Lixeira>
+              <h5>Valor total</h5>
+              <span>{parseToBrl(somaCarrinho(itemsCarrinho))}</span>
             </div>
-          </S.ListLink>
-        ))}
-      </ul>
-      <S.AreaConfirmacao>
-        <div>
-          <h5>Valor total</h5>
-          <span>{parseToBrl(somaCarrinho(itemsCarrinho))}</span>
-        </div>
-        <Button
-          type="button"
-          onClick={() => dispatch(alteraEstadoCarrinho('endereco'))}
-        >
-          Continuar com a entrega
-        </Button>
-      </S.AreaConfirmacao>
+            <Button
+              type="button"
+              onClick={() => dispatch(alteraEstadoCarrinho('endereco'))}
+            >
+              Continuar com a entrega
+            </Button>
+          </S.AreaConfirmacao>
+        </>
+      ) : (
+        <S.CarrinhoVazio>
+          O carrinho está vazio, adicione pelo menos um item.
+        </S.CarrinhoVazio>
+      )}
     </>
   )
 }

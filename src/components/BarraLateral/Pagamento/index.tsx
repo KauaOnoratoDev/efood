@@ -17,7 +17,7 @@ import { parseToBrl, somaCarrinho } from '../../../utils'
 const Pagamento = () => {
   const dispatch = useDispatch()
   const { api, itemsCarrinho } = useSelector((state: RootReducer) => state.cart)
-  const [purchase, { isSuccess, data, isLoading }] = usePurchaseMutation()
+  const [purchase, { data, isLoading }] = usePurchaseMutation()
 
   const formPagamento = useFormik({
     initialValues: {
@@ -76,7 +76,8 @@ const Pagamento = () => {
           price: somaCarrinho(itemsCarrinho)
         }))
       })
-      isSuccess && dispatch(alteraEstadoCarrinho('finalizado'))
+      data && dispatch(adicionarData(data.orderId))
+      dispatch(alteraEstadoCarrinho('finalizado'))
     }
   })
 
@@ -164,11 +165,7 @@ const Pagamento = () => {
           </S.Input>
         </div>
         <S.Botoes>
-          <Button
-            onClick={() => data && dispatch(adicionarData(data.orderId))}
-            disabled={isLoading}
-            type="submit"
-          >
+          <Button disabled={isLoading} type="submit">
             {isLoading ? 'Finalizando pagamento' : 'Finalizar pagamento'}
           </Button>
           <Button

@@ -1,9 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 
-import {
-  alteraEstadoCarrinho,
-  zerarCarrinho
-} from '../../../store/reducers/cart'
+import { alteraEstadoCarrinho } from '../../../store/reducers/cart'
 import { RootReducer } from '../../../store'
 
 import { Button } from '../../../styles'
@@ -37,8 +34,6 @@ const PedidoRealizado = () => {
         type="button"
         onClick={() => {
           dispatch(alteraEstadoCarrinho(''))
-          dispatch(zerarCarrinho())
-          alert('Seu pedido foi realizado com sucesso!')
           navigate('/')
         }}
       >
