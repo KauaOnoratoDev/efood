@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
+import InputMask from 'react-input-mask'
 
 import {
-  adicionarApi,
   adicionarData,
   alteraEstadoCarrinho
 } from '../../../store/reducers/cart'
@@ -17,7 +17,7 @@ import { parseToBrl, somaCarrinho } from '../../../utils'
 const Pagamento = () => {
   const dispatch = useDispatch()
   const { api, itemsCarrinho } = useSelector((state: RootReducer) => state.cart)
-  const [purchase, { isSuccess, data }] = usePurchaseMutation()
+  const [purchase, { data, isLoading }] = usePurchaseMutation()
 
   const formPagamento = useFormik({
     initialValues: {
@@ -36,7 +36,7 @@ const Pagamento = () => {
         .max(3)
         .required('O campo é obrigatório'),
       mesVencimento: Yup.string()
-        .min(1, 'O mes de vencimento precisa ter 2 caracteres')
+        .min(2, 'O mes de vencimento precisa ter 2 caracteres')
         .max(2)
         .required('O campo é obrigatório'),
       anoVencimento: Yup.string()
@@ -44,12 +44,11 @@ const Pagamento = () => {
         .max(2)
         .required('O campo é obrigatório'),
       numCartao: Yup.string()
-        .min(16, 'O numero precisa ter 16 caracteres')
-        .max(16)
+        .min(19, 'O numero precisa ter 16 caracteres')
+        .max(19)
         .required('O campo é obrigatório')
     }),
     onSubmit: (values) => {
-      dispatch(adicionarApi(values))
       purchase({
         delivery: {
           receiver: api.nome,
@@ -63,25 +62,22 @@ const Pagamento = () => {
         },
         payment: {
           card: {
-            name: api.nomeCartao,
-            number: String(api.numCartao),
-            code: api.codigoCartao,
+            name: values.nomeCartao,
+            number: String(values.numCartao),
+            code: Number(values.codigoCartao),
             expires: {
-              month: api.mesVencimento,
-              year: api.anoVencimento
+              month: Number(values.mesVencimento),
+              year: Number(values.anoVencimento)
             }
           }
         },
-        products: [
-          {
-            id: 1,
-            price: 100
-          }
-        ]
+        products: itemsCarrinho.map((item) => ({
+          id: item.id,
+          price: somaCarrinho(itemsCarrinho)
+        }))
       })
-      isSuccess &&
-        (dispatch(alteraEstadoCarrinho('finalizado')),
-        dispatch(adicionarData(data.orderId)))
+      data && dispatch(adicionarData(data.orderId))
+      dispatch(alteraEstadoCarrinho('finalizado'))
     }
   })
 
@@ -100,9 +96,9 @@ const Pagamento = () => {
           Pagamento - Valor total a pagar{' '}
           <span>{parseToBrl(somaCarrinho(itemsCarrinho))}</span>
         </h3>
-        <div>
+        <S.Input>
           <label htmlFor="nomeCartao">Nome no cartão</label>
-          <S.Input
+          <input
             type="text"
             id="nomeCartao"
             name="nomeCartao"
@@ -111,23 +107,24 @@ const Pagamento = () => {
             onBlur={formPagamento.handleBlur}
             className={getError('nomeCartao') ? 'error' : ''}
           />
-        </div>
+        </S.Input>
         <div>
-          <div>
+          <S.Input>
             <label htmlFor="numCartao">Número no cartão</label>
-            <S.Input
-              type="number"
+            <InputMask
+              type="text"
               id="numCartao"
               name="numCartao"
               value={formPagamento.values.numCartao}
               onChange={formPagamento.handleChange}
               onBlur={formPagamento.handleBlur}
               className={getError('numCartao') ? 'error' : ''}
+              mask={'9999 9999 9999 9999'}
             />
-          </div>
-          <div>
+          </S.Input>
+          <S.Input>
             <label htmlFor="codigoCartao">CVV</label>
-            <S.Input
+            <InputMask
               type="num"
               id="codigoCartao"
               name="codigoCartao"
@@ -135,37 +132,42 @@ const Pagamento = () => {
               onChange={formPagamento.handleChange}
               onBlur={formPagamento.handleBlur}
               className={getError('codigoCartao') ? 'error' : ''}
+              mask={'999'}
             />
-          </div>
+          </S.Input>
         </div>
         <div>
-          <div>
+          <S.Input>
             <label htmlFor="mesVencimento">Mês de vencimento</label>
-            <S.Input
-              type="number"
+            <InputMask
+              type="num"
               id="mesVencimento"
               name="mesVencimento"
               value={formPagamento.values.mesVencimento}
               onChange={formPagamento.handleChange}
               onBlur={formPagamento.handleBlur}
               className={getError('mesVencimento') ? 'error' : ''}
+              mask={'99'}
             />
-          </div>
-          <div>
+          </S.Input>
+          <S.Input>
             <label htmlFor="anoVencimento">Ano de vencimento</label>
-            <S.Input
-              type="number"
+            <InputMask
+              type="num"
               id="anoVencimento"
               name="anoVencimento"
               value={formPagamento.values.anoVencimento}
               onChange={formPagamento.handleChange}
               onBlur={formPagamento.handleBlur}
               className={getError('anoVencimento') ? 'error' : ''}
+              mask={'99'}
             />
-          </div>
+          </S.Input>
         </div>
         <S.Botoes>
-          <Button type="submit">Finalizar pagamento</Button>
+          <Button disabled={isLoading} type="submit">
+            {isLoading ? 'Finalizando pagamento' : 'Finalizar pagamento'}
+          </Button>
           <Button
             type="button"
             onClick={() => {

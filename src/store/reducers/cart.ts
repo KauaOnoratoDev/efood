@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Cardapio } from '../../pages/Home'
 
-export type Api = {
+type Api = {
   anoVencimento: number
   cep: number
   cidade: string

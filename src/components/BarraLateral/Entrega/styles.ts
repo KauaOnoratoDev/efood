@@ -32,12 +32,12 @@ export const Form = styled.form`
   }
 `
 
-export const Input = styled.input`
-  padding: 8px;
-  margin: 8px 0;
-  width: 100%;
-  background-color: ${colors.sand};
-  border: 1px solid ${colors.sand};
+export const Input = styled.div`
+  input {
+    padding: 8px;
+    margin: 8px 0;
+    width: 100%;
+  }
 `
 
 export const Botoes = styled.div`

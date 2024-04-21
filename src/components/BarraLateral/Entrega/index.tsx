@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import InputMask from 'react-input-mask'
 
 import {
   adicionarApi,
@@ -33,8 +34,8 @@ const Entrega = () => {
         .max(9, 'O cep precisa ter 7 caracteres')
         .required('O campo é obrigatório'),
       num: Yup.string()
-        .min(11, 'O numero precisa ter pelo menos 11 caracteres')
-        .max(11, 'O numero precisa ter 11 caracteres')
+        .min(15, 'O numero precisa ter pelo menos 11 caracteres')
+        .max(15, 'O numero precisa ter 11 caracteres')
         .required('O campo é obrigatório'),
       complemento: Yup.string()
     }),
@@ -56,9 +57,9 @@ const Entrega = () => {
     <>
       <S.Form onSubmit={formEntrega.handleSubmit}>
         <h3>Entrega</h3>
-        <div>
+        <S.Input>
           <label htmlFor="nome">Quem irá receber</label>
-          <S.Input
+          <input
             type="text"
             id="nome"
             name="nome"
@@ -67,10 +68,10 @@ const Entrega = () => {
             onBlur={formEntrega.handleBlur}
             className={getError('nome') ? 'error' : ''}
           />
-        </div>
-        <div>
+        </S.Input>
+        <S.Input>
           <label htmlFor="endereco">Endereço</label>
-          <S.Input
+          <input
             type="text"
             id="endereco"
             name="endereco"
@@ -79,10 +80,10 @@ const Entrega = () => {
             onBlur={formEntrega.handleBlur}
             className={getError('endereco') ? 'error' : ''}
           />
-        </div>
-        <div>
+        </S.Input>
+        <S.Input>
           <label htmlFor="cidade">Cidade</label>
-          <S.Input
+          <input
             type="text"
             id="cidade"
             name="cidade"
@@ -91,11 +92,11 @@ const Entrega = () => {
             onBlur={formEntrega.handleBlur}
             className={getError('cidade') ? 'error' : ''}
           />
-        </div>
+        </S.Input>
         <div className="cepNum">
-          <div>
+          <S.Input>
             <label htmlFor="cep">CEP</label>
-            <S.Input
+            <InputMask
               type="text"
               id="cep"
               name="cep"
@@ -103,24 +104,26 @@ const Entrega = () => {
               onChange={formEntrega.handleChange}
               onBlur={formEntrega.handleBlur}
               className={getError('cep') ? 'error' : ''}
+              mask={'99999-999'}
             />
-          </div>
-          <div>
+          </S.Input>
+          <S.Input>
             <label htmlFor="num">Número</label>
-            <S.Input
-              type="number"
+            <InputMask
+              type="text"
               id="num"
               name="num"
               value={formEntrega.values.num}
               onChange={formEntrega.handleChange}
               onBlur={formEntrega.handleBlur}
               className={getError('num') ? 'error' : ''}
+              mask={'(99) 99999-9999'}
             />
-          </div>
+          </S.Input>
         </div>
-        <div>
+        <S.Input>
           <label htmlFor="complemento">Complemento (opcional)</label>
-          <S.Input
+          <input
             type="text"
             id="complemento"
             name="complemento"
@@ -128,7 +131,7 @@ const Entrega = () => {
             onChange={formEntrega.handleChange}
             onBlur={formEntrega.handleBlur}
           />
-        </div>
+        </S.Input>
         <S.Botoes>
           <Button type="submit">Continuar com o pagamento</Button>
           <Button

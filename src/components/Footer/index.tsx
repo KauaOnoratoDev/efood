@@ -10,13 +10,19 @@ const Footer = () => (
       <S.Img src={logo} alt="logo" />
       <S.List>
         <li>
-          <img src={instagram} alt="" />
+          <a href="#">
+            <img src={instagram} alt="" />
+          </a>
         </li>
         <li>
-          <img src={facebook} alt="" />
+          <a href="#">
+            <img src={facebook} alt="" />
+          </a>
         </li>
         <li>
-          <img src={twitter} alt="" />
+          <a href="#">
+            <img src={twitter} alt="" />
+          </a>
         </li>
       </S.List>
       <S.Text>
