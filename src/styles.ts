@@ -13,10 +13,6 @@ export const GlobalStyle = createGlobalStyle`
         font-family: "Roboto", sans-serif;
         list-style: none;
         text-decoration: none;
-
-        .error {
-          border: 2px solid red;
-        }
     }
 
     .container {
@@ -59,5 +55,22 @@ export const Fundo = styled.div`
     position: fixed;
     top: 0;
     left: 0;
+  }
+`
+
+export const Input = styled.div`
+  width: 100%;
+  margin-bottom: 16px;
+
+  .error {
+    border: 2px solid red;
+  }
+
+  input {
+    padding: 8px;
+    margin: 8px 0;
+    width: 100%;
+    background-color: ${colors.sand};
+    border: 1px solid ${colors.sand};
   }
 `
