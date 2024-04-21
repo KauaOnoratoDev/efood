@@ -35,14 +35,6 @@ export const Form = styled.form`
   }
 `
 
-export const Input = styled.div`
-  input {
-    padding: 8px;
-    margin: 8px 0;
-    width: 100%;
-  }
-`
-
 export const Botoes = styled.div`
   margin-top: 16px;
   width: 100%;

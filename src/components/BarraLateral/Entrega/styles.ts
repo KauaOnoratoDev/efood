@@ -9,14 +9,6 @@ export const Form = styled.form`
   font-weight: bold;
   width: 100%;
 
-  > div {
-    margin-bottom: 16px;
-
-    small {
-      color: red;
-    }
-  }
-
   h3 {
     margin-bottom: 16px;
     font-size: 16px;
@@ -25,18 +17,6 @@ export const Form = styled.form`
   .cepNum {
     display: flex;
     gap: 32px;
-
-    div {
-      width: 100%;
-    }
-  }
-`
-
-export const Input = styled.div`
-  input {
-    padding: 8px;
-    margin: 8px 0;
-    width: 100%;
   }
 `
 

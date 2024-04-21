@@ -1,17 +1,19 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import { alteraEstadoCarrinho } from '../../../store/reducers/cart'
-import { RootReducer } from '../../../store'
 
 import { Button } from '../../../styles'
 import { Container } from './styles'
 import { useNavigate } from 'react-router-dom'
 import Loader from '../../Loader'
 
-const PedidoRealizado = () => {
+type Props = {
+  data: string
+}
+
+const PedidoRealizado = ({ data }: Props) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { data } = useSelector((state: RootReducer) => state.cart)
 
   !data && <Loader />
 

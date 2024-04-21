@@ -5,19 +5,21 @@ import InputMask from 'react-input-mask'
 
 import {
   adicionarData,
-  alteraEstadoCarrinho
+  alteraEstadoCarrinho,
+  zerarCarrinho
 } from '../../../store/reducers/cart'
 import { RootReducer } from '../../../store'
 import { usePurchaseMutation } from '../../../services/api'
 
-import { Button } from '../../../styles'
+import { Button, Input } from '../../../styles'
 import * as S from './styles'
 import { parseToBrl, somaCarrinho } from '../../../utils'
+import { useEffect } from 'react'
 
 const Pagamento = () => {
   const dispatch = useDispatch()
   const { api, itemsCarrinho } = useSelector((state: RootReducer) => state.cart)
-  const [purchase, { data, isLoading }] = usePurchaseMutation()
+  const [purchase, { data, isLoading, isSuccess }] = usePurchaseMutation()
 
   const formPagamento = useFormik({
     initialValues: {
@@ -76,10 +78,15 @@ const Pagamento = () => {
           price: somaCarrinho(itemsCarrinho)
         }))
       })
-      data && dispatch(adicionarData(data.orderId))
-      dispatch(alteraEstadoCarrinho('finalizado'))
     }
   })
+
+  useEffect(() => {
+    data &&
+      (dispatch(adicionarData(data.orderId)),
+      dispatch(alteraEstadoCarrinho('finalizado')),
+      dispatch(zerarCarrinho()))
+  }, [data, dispatch])
 
   const getError = (fieldName: string) => {
     const isTouched = fieldName in formPagamento.touched
@@ -96,7 +103,7 @@ const Pagamento = () => {
           Pagamento - Valor total a pagar{' '}
           <span>{parseToBrl(somaCarrinho(itemsCarrinho))}</span>
         </h3>
-        <S.Input>
+        <Input>
           <label htmlFor="nomeCartao">Nome no cartão</label>
           <input
             type="text"
@@ -106,10 +113,13 @@ const Pagamento = () => {
             onChange={formPagamento.handleChange}
             onBlur={formPagamento.handleBlur}
             className={getError('nomeCartao') ? 'error' : ''}
+            placeholder={
+              getError('nomeCartao') ? 'Este campo é obrigatório' : ''
+            }
           />
-        </S.Input>
+        </Input>
         <div>
-          <S.Input>
+          <Input>
             <label htmlFor="numCartao">Número no cartão</label>
             <InputMask
               type="text"
@@ -119,10 +129,13 @@ const Pagamento = () => {
               onChange={formPagamento.handleChange}
               onBlur={formPagamento.handleBlur}
               className={getError('numCartao') ? 'error' : ''}
+              placeholder={
+                getError('numCartao') ? 'Este campo é obrigatório' : ''
+              }
               mask={'9999 9999 9999 9999'}
             />
-          </S.Input>
-          <S.Input>
+          </Input>
+          <Input>
             <label htmlFor="codigoCartao">CVV</label>
             <InputMask
               type="num"
@@ -132,12 +145,15 @@ const Pagamento = () => {
               onChange={formPagamento.handleChange}
               onBlur={formPagamento.handleBlur}
               className={getError('codigoCartao') ? 'error' : ''}
+              placeholder={
+                getError('codigoCartao') ? 'Este campo é obrigatório' : ''
+              }
               mask={'999'}
             />
-          </S.Input>
+          </Input>
         </div>
         <div>
-          <S.Input>
+          <Input>
             <label htmlFor="mesVencimento">Mês de vencimento</label>
             <InputMask
               type="num"
@@ -147,10 +163,13 @@ const Pagamento = () => {
               onChange={formPagamento.handleChange}
               onBlur={formPagamento.handleBlur}
               className={getError('mesVencimento') ? 'error' : ''}
+              placeholder={
+                getError('mesVencimento') ? 'Este campo é obrigatório' : ''
+              }
               mask={'99'}
             />
-          </S.Input>
-          <S.Input>
+          </Input>
+          <Input>
             <label htmlFor="anoVencimento">Ano de vencimento</label>
             <InputMask
               type="num"
@@ -160,9 +179,12 @@ const Pagamento = () => {
               onChange={formPagamento.handleChange}
               onBlur={formPagamento.handleBlur}
               className={getError('anoVencimento') ? 'error' : ''}
+              placeholder={
+                getError('anoVencimento') ? 'Este campo é obrigatório' : ''
+              }
               mask={'99'}
             />
-          </S.Input>
+          </Input>
         </div>
         <S.Botoes>
           <Button disabled={isLoading} type="submit">

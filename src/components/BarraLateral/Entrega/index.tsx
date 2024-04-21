@@ -8,7 +8,7 @@ import {
   alteraEstadoCarrinho
 } from '../../../store/reducers/cart'
 
-import { Button } from '../../../styles'
+import { Button, Input } from '../../../styles'
 import * as S from './styles'
 
 const Entrega = () => {
@@ -30,12 +30,12 @@ const Entrega = () => {
       endereco: Yup.string().required('O campo é obrigatório'),
       cidade: Yup.string().required('O campo é obrigatório'),
       cep: Yup.string()
-        .min(9, 'O cep precisa ter pelo menos 7 caracteres')
-        .max(9, 'O cep precisa ter 7 caracteres')
+        .min(9, 'O cep precisa ter pelo menos 9 caracteres')
+        .max(9, 'O cep precisa ter 9 caracteres')
         .required('O campo é obrigatório'),
       num: Yup.string()
-        .min(15, 'O numero precisa ter pelo menos 11 caracteres')
-        .max(15, 'O numero precisa ter 11 caracteres')
+        .min(2, 'O numero precisa ter pelo menos 2 caracteres')
+        .max(4, 'O numero precisa ter 4 caracteres ou menos')
         .required('O campo é obrigatório'),
       complemento: Yup.string()
     }),
@@ -57,7 +57,7 @@ const Entrega = () => {
     <>
       <S.Form onSubmit={formEntrega.handleSubmit}>
         <h3>Entrega</h3>
-        <S.Input>
+        <Input>
           <label htmlFor="nome">Quem irá receber</label>
           <input
             type="text"
@@ -67,9 +67,10 @@ const Entrega = () => {
             onChange={formEntrega.handleChange}
             onBlur={formEntrega.handleBlur}
             className={getError('nome') ? 'error' : ''}
+            placeholder={getError('nome') ? 'Este campo é obrigatório' : ''}
           />
-        </S.Input>
-        <S.Input>
+        </Input>
+        <Input>
           <label htmlFor="endereco">Endereço</label>
           <input
             type="text"
@@ -79,9 +80,10 @@ const Entrega = () => {
             onChange={formEntrega.handleChange}
             onBlur={formEntrega.handleBlur}
             className={getError('endereco') ? 'error' : ''}
+            placeholder={getError('endereco') ? 'Este campo é obrigatório' : ''}
           />
-        </S.Input>
-        <S.Input>
+        </Input>
+        <Input>
           <label htmlFor="cidade">Cidade</label>
           <input
             type="text"
@@ -91,10 +93,11 @@ const Entrega = () => {
             onChange={formEntrega.handleChange}
             onBlur={formEntrega.handleBlur}
             className={getError('cidade') ? 'error' : ''}
+            placeholder={getError('cidade') ? 'Este campo é obrigatório' : ''}
           />
-        </S.Input>
+        </Input>
         <div className="cepNum">
-          <S.Input>
+          <Input>
             <label htmlFor="cep">CEP</label>
             <InputMask
               type="text"
@@ -104,24 +107,25 @@ const Entrega = () => {
               onChange={formEntrega.handleChange}
               onBlur={formEntrega.handleBlur}
               className={getError('cep') ? 'error' : ''}
+              placeholder={getError('cep') ? 'Este campo é obrigatório' : ''}
               mask={'99999-999'}
             />
-          </S.Input>
-          <S.Input>
+          </Input>
+          <Input>
             <label htmlFor="num">Número</label>
-            <InputMask
-              type="text"
+            <input
+              type="number"
               id="num"
               name="num"
               value={formEntrega.values.num}
               onChange={formEntrega.handleChange}
               onBlur={formEntrega.handleBlur}
               className={getError('num') ? 'error' : ''}
-              mask={'(99) 99999-9999'}
+              placeholder={getError('num') ? 'Este campo é obrigatório' : ''}
             />
-          </S.Input>
+          </Input>
         </div>
-        <S.Input>
+        <Input>
           <label htmlFor="complemento">Complemento (opcional)</label>
           <input
             type="text"
@@ -131,7 +135,7 @@ const Entrega = () => {
             onChange={formEntrega.handleChange}
             onBlur={formEntrega.handleBlur}
           />
-        </S.Input>
+        </Input>
         <S.Botoes>
           <Button type="submit">Continuar com o pagamento</Button>
           <Button
