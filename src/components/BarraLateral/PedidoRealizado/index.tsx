@@ -9,11 +9,14 @@ import { RootReducer } from '../../../store'
 import { Button } from '../../../styles'
 import { Container } from './styles'
 import { useNavigate } from 'react-router-dom'
+import Loader from '../../Loader'
 
 const PedidoRealizado = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { data } = useSelector((state: RootReducer) => state.cart)
+
+  !data && <Loader />
 
   return (
     <Container>

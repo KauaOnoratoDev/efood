@@ -1,5 +1,3 @@
-import { Cardapio } from '../pages/Home'
-
 export const parseToBrl = (price: number) => {
   return new Intl.NumberFormat('pt-BR', {
     style: 'currency',

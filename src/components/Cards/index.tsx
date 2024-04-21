@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 
 import estrela from '../../assets/images/estrela.png'
-import { Restaurantes } from '../../pages/Home'
 
 import * as S from './styles'
 import { Button } from '../../styles'

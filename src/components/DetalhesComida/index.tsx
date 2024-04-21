@@ -33,7 +33,7 @@ const DetalhesComida = ({ nome, descricao, foto, porcao, preco }: Props) => {
               {porcao}
             </S.Text>
             <Button
-              type="submit"
+              type="button"
               onClick={() => {
                 dispatch(
                   add({
